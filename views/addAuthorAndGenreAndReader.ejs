@@ -1,0 +1,77 @@
+<%- include('layout/header') %>
+
+<div class="container-sm mt-3 row " >
+
+    <!-- Authors -->
+    <div class="col-md-4 px-4">
+        <h3 class="mb-4">Authors</h3>
+        <form action="/addAuthor" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" name="author_name" id="author_name" required>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Author</button>
+            </div>
+        </form>
+
+        <label for="currentAuthors" class="form-label">Current Authors</label>
+        <select class="form-select" size="10" aria-label="size 3 select example" id="currentAuthors">
+            <!-- make a loop for the Authors -->
+            <% for( let i = 0; i < authors.length; i++ ) { %>
+                <option ><%= authors[i].author_name %></option>
+            <% } %>
+        </select>
+        
+    </div>
+
+
+
+
+    <!-- Genres -->
+    <div class="col-md-4 px-4">
+        <h3 class="mb-4">Genres</h3>
+        <form action="/addGenre" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" name="genre_name" id="genre_name" required>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Genre</button>
+            </div>
+        </form>
+
+        <label for="currentGenres" class="form-label">Current Genres</label>
+
+        <select class="form-select" size="10" aria-label="size 3 select example" id="currentGenres">
+            <!-- make a loop for the genres -->
+            <% for( let i = 0; i < genres.length; i++ ) { %>
+                <option ><%= genres[i].genre_name %></option>
+            <% } %>
+        </select>
+        
+    </div>
+
+
+    <!-- Readers -->
+
+    <div class="col-md-4 px-4">
+        <h3 class="mb-4">Readers</h3>
+        <form action="/addReader" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" name="reader_name" id="reader_name" required>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Reader</button>
+            </div>
+        </form>
+
+        <label for="currentReaders" class="form-label">Current Readers</label>
+
+        <select class="form-select" size="10" aria-label="size 3 select example" id="currentReaders">
+            <!-- make a loop for the Readers -->
+            <% for( let i = 0; i < readers.length; i++ ) { %>
+                <% if (readers[i].reader_id != 0 ) { %>
+                    <option ><%= readers[i].reader_name %></option>
+                <% } %>
+            <% } %>
+        </select>
+        
+    </div>
+    
+
+</div>
+
+<%- include('layout/footer') %>

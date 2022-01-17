@@ -1,0 +1,30 @@
+<%- include('layout/header') %>
+
+
+<div class="container p-3">
+    <h1 class="mt-5">Books</h1>
+    <% for( let i = 0; i < books.length; i++ ) { %>
+        <h3><%= books[i].bookName %> </h3>
+    <% } %>
+    
+    <h1 class="mt-5">Authors</h1>
+    <% for( let i = 0; i < authors.length; i++ ) { %>
+        <h3><%= authors[i].authorName %> </h3>
+    <% } %>
+    
+    <h1 class="mt-5">Genres</h1>
+    <% for( let i = 0; i < genres.length; i++ ) { %>
+        <h3><%= genres[i].genreName %> </h3>
+    <% } %>
+    
+    <h1 class="mt-5">Readers</h1>
+    <% for( let i = 0; i < readers.length; i++ ) { %>
+        <h3><%= readers[i].readerName %> </h3>
+    <% } %>
+    
+</div>
+
+
+
+
+<%- include('layout/footer') %>

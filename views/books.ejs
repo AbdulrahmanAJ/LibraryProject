@@ -1,0 +1,124 @@
+<%- include('layout/header') %>
+
+
+<div class="container mt-5">
+  <!-- The Nav Header -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active fs-5" data-bs-toggle="tab" href="#allBooks">All Books</a>
+    </li>
+
+    <!-- A loop for each genre Header -->
+    <% for( let i = 0; i < genres.length; i++ ) { %>
+      <li class="nav-item">
+        <a class="nav-link fs-5" data-bs-toggle="tab" href="#genre<%= genres[i].genre_id %>"><%= genres[i].genre_name %></a>
+      </li>
+    <% } %>
+  </ul>
+
+
+  <!-- The nave Body -->
+  <div id="myTabContent" class="tab-content">
+    <!-- The part of the all books -->
+    <div class="tab-pane fade active show " id="allBooks">
+      <div class="container mt-3">
+        <h3 class="my-3">Books Count: <%= books_count %> </h3>
+        <table class="table ">
+        <!-- <table class="table table-striped table-hover table-primary"> -->
+          <thead>
+            <tr>
+              <th scope="col">name</th>
+              <th scope="col">author</th>
+              <th scope="col">pages</th>
+              <th scope="col">genre</th>
+              <th scope="col">book copy</th>
+              <th scope="col">loaned</th>
+              <th scope="col">did read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for( let i = 0; i < books.length; i++ ) { %>
+              <tr>
+                <td><%= books[i].book_name %> </td>
+                <td><%= books[i].author_name %> </td>
+                <% if (books[i].book_pages) { %>
+                  <td><%= books[i].book_pages %></td>
+                <% } else { %>
+                  <td>unknown</td>
+                <% } %>
+                <td><%= books[i].genre_name %> </td>
+                <td><%= books[i].book_copy %> </td>
+                <% if (books[i].reader_id == 0) { %>
+                  <td>NO</td>
+                <% } else { %>
+                  <td><%= books[i].reader_name %> </td>
+                <% } %>
+  
+                <% if (books[i].did_read == 1) { %>
+                  <td>YES</td>
+                <% } else { %>
+                  <td>NO</td>
+                <% } %>
+                
+              </tr>
+            <% } %>
+  
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- A loop for each genre -->
+    <% for( let i = 0; i < genres.length; i++ ) { %>
+      <div class="tab-pane fade" id="genre<%= genres[i].genre_id %>">
+        <!-- The table of the genre -->
+        <div class="container mt-3">
+          <h3 class="my-3">Books Count: <%= genres[i]['COUNT(books.genre_id)'] %> </h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">author</th>
+                <th scope="col">pages</th>
+                <th scope="col">book copy</th>
+                <th scope="col">loaned</th>
+                <th scope="col">did read</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for( let j = 0; j < books.length; j++ ) { %>
+                <% if (books[j].genre_id == genres[i].genre_id) { %>
+                  <tr>
+                    <td><%= books[j].book_name %> </td>
+                    <td><%= books[j].author_name %> </td>
+                    <% if (books[j].book_pages) { %>
+                      <td><%= books[j].book_pages %></td>
+                    <% } else { %>
+                      <td>unknown</td>
+                    <% } %>
+                    <td><%= books[j].book_copy %> </td>
+                    <% if (books[j].reader_id == 0) { %>
+                      <td>NO</td>
+                    <% } else { %>
+                      <td><%= books[j].reader_name %> </td>
+                    <% } %>
+      
+                    <% if (books[j].did_read == 1) { %>
+                      <td>YES</td>
+                    <% } else { %>
+                      <td>NO</td>
+                    <% } %>
+                  </tr>
+                <% } %>
+                
+              <% } %>
+    
+            </tbody>
+          </table>
+        </div>
+      </div>     
+    <% } %>
+
+  </div>
+
+<%- include('layout/footer') %>

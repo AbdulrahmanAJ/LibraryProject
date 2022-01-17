@@ -1,0 +1,54 @@
+<%- include('layout/header') %>
+
+
+<div class="container p-3">
+    <h1 class="mt-5">Books</h1>
+    <form action="/deleteBook" method="post">
+        <select name="book_id" id="" required>
+            <% for( let i = 0; i < books.length; i++ ) { %>
+                <option value="<%= books[i].book_id %>"><%= books[i].book_name %></option>
+            <% } %>
+        </select>
+        <button type="submit">delete</button>
+    </form>
+
+    <h1 class="mt-5">Genres</h1>
+    <form action="/deleteGenre" method="post">
+        <select name="genre_id" id="" required>
+            <% for( let i = 0; i < genres.length; i++ ) { %>
+                <option value="<%= genres[i].genre_id %>"><%= genres[i].genre_name %></option>
+            <% } %>
+        </select>
+        <button type="submit">delete</button>
+    </form>
+
+    <h1 class="mt-5">Authors</h1>
+    <form action="/deleteAuthor" method="post">
+        <select name="author_id" id="" required>
+            <% for( let i = 0; i < authors.length; i++ ) { %>
+                <option value="<%= authors[i].author_id %>"><%= authors[i].author_name %></option>
+            <% } %>
+        </select>
+        <button type="submit">delete</button>
+    </form>
+
+    <h1 class="mt-5">Readers</h1>
+    <form action="/deleteReader" method="post">
+        <select name="reader_id" id="" required>
+            <% for( let i = 0; i < readers.length; i++ ) { %>
+                <% if (readers[i].reader_id != 0) { %>
+                    <option value="<%= readers[i].reader_id %>"><%= readers[i].reader_name %></option>    
+                <% } %>
+                
+            <% } %>
+        </select>
+        <button type="submit">delete</button>
+    </form>
+
+
+</div>
+
+
+
+
+<%- include('layout/footer') %>
