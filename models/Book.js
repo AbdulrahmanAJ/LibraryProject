@@ -31,9 +31,13 @@ module.exports = (sequelize, DataTypes) => {
         },
     })
   
-    // Class Method
-    // Model1.associate = function (models) {
-    //   Model1.belongsTo(models.Model2)
-    // }
+    // create the associations
+    Book.associate = (models) => {
+        Book.belongsTo(models.Author, { foreignKey: 'authorId' });
+        Book.belongsTo(models.Genre, { foreignKey: 'genreId' });
+        Book.belongsTo(models.Reader, { foreignKey: 'readerId' });
+    }
+
+
     return Book;
   }

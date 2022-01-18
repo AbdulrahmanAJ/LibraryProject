@@ -38,31 +38,23 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/sequelize/insert', async (req, res) => {
-    
-    await sequelize.Author.create({ authorName: "Jane" })
-    await sequelize.Genre.create({ authorName: "Jane" })
-    await sequelize.Reader.create({ authorName: "Jane" })
-    await sequelize.Author.create({ authorName: "Jane" })
-
-    res.redirect("/")
-})
 
 
 // create the routing
-app.get('/', async (req, res) => {
-    const authors = await sequelize.Author.findAll();
-    const genres = await sequelize.Genre.findAll();
-    const readers = await sequelize.Reader.findAll();
-    const books = await sequelize.Book.findAll();
+app.use('/', require('./routes/pages.router'))
+app.use('/modify', require('./routes/modify.router'))
 
-    res.render("all",  {
-        authors,
-        genres,
-        readers,
-        books
-    })
-})
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/delete', (req, res) => {
     // res.redirect('/books')

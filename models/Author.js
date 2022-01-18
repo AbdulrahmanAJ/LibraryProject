@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }) 
   
-    // Class Method
+    // Assosiating the author with the books
     Author.associate = (models) => {
         Author.hasMany(models.Book, {
             foreignKey: 'authorId'

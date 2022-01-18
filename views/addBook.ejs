@@ -2,29 +2,29 @@
 
 <div class="container-sm px-5 py-4">
     <h1 class="my-3">Adding New Book Form</h1>
-    <form action="/addBook" method="post" class="row g-3">
+    <form action="/modify/add/Book" method="post" class="row g-3">
         
         <!-- book name -->
         <div class="col-md-8">
-            <label for="book_name" class="form-label">Book Name</label>
-            <input type="text" class="form-control" id="book_name" name="book_name" required placeholder="Ex. Atomic Habit">
+            <label for="bookName" class="form-label">Book Name</label>
+            <input type="text" class="form-control" id="bookName" name="bookName" required placeholder="Ex. Atomic Habit">
         </div>
 
         <!-- book pages -->
         <div class="col-md-4">
-            <label for="book_pages" class="form-label">Book pages</label>
-            <input type="number" class="form-control" id="book_pages" name="book_pages" value=null placeholder="Ex. 252">
+            <label for="bookPages" class="form-label">Book pages</label>
+            <input type="number" class="form-control" id="bookPages" name="bookPages" value=null placeholder="Ex. 252">
         </div>
 
         <!-- book author -->
         <div class="col-md-6">
-            <label for="author_id" class="form-label">Book Author</label> 
+            <label for="authorId" class="form-label">Book Author</label> 
             <div class="input-group mb-3">
-                <select class="form-select" aria-label="Default select example" id="author_id" name="author_id" required>
+                <select class="form-select" aria-label="Default select example" id="authorId" name="authorId" required>
                     <!-- made a list for the authors -->
                     <option selected disabled>Choose Author</option >
                     <% for( let i = 0; i < authors.length; i++ ) { %>
-                        <option value="<%= authors[i].author_id %>"><%= authors[i].author_name %></option>
+                        <option value="<%= authors[i].authorId %>"><%= authors[i].authorName %></option>
                     <% } %>
                 </select>
                 <a href="/addAuthorAndGenreAndReader" target="_blank" >
@@ -39,13 +39,13 @@
 
         <!-- book genre -->
         <div class="col-md-6">
-            <label for="genre_id" class="form-label">Book Genre</label> 
+            <label for="genreId" class="form-label">Book Genre</label> 
             <div class="input-group mb-3">
-                <select class="form-select" aria-label="Default select example" id="genre_id" name="genre_id" required>
+                <select class="form-select" aria-label="Default select example" id="genreId" name="genreId" required>
                     <!-- make a list for the genre -->
                     <option selected disabled>Choose Genre</option >
                     <% for( let i = 0; i < genres.length; i++ ) { %>
-                        <option value="<%= genres[i].genre_id %>"><%= genres[i].genre_name %></option>
+                        <option value="<%= genres[i].genreId %>"><%= genres[i].genreName %></option>
                     <% } %>
                 </select>
                 <a href="/addAuthorAndGenreAndReader" target="_blank" >
@@ -58,14 +58,14 @@
 
         <!-- book reader -->
         <div class="col-md-6">
-            <label for="reader_id" class="form-label">Book Reader</label> 
+            <label for="readerId" class="form-label">Book Reader</label> 
             <div class="input-group mb-3">
-                <select class="form-select" aria-label="Default select example" id="reader_id" name="reader_id" required>
+                <select class="form-select" aria-label="Default select example" id="readerId" name="readerId" required>
                     <!-- make a list for the reader -->
                     <option selected value="0">Not Borrowed</option >
                     <% for( let i = 0; i < readers.length; i++ ) { %>
-                        <% if (readers[i].reader_id != 0 ) { %>
-                            <option value="<%= readers[i].reader_id %>"><%= readers[i].reader_name %></option>
+                        <% if (readers[i].readerId != 0 ) { %>
+                            <option value="<%= readers[i].readerId %>"><%= readers[i].readerName %></option>
                         <% } %>
                     <% } %>
                 </select>
@@ -79,21 +79,21 @@
 
         <!-- book copy -->
         <div class="col-md-3">
-            <label for="book_copy" class="form-label">Book Copy</label>
-            <input type="number" class="form-control" id="book_copy" name="book_copy"  value="1">
+            <label for="bookCopy" class="form-label">Book Copy</label>
+            <input type="number" class="form-control" id="bookCopy" name="bookCopy"  value="1">
         </div>
 
         <!-- read or no -->
         <div class="col-md-3">
             <div class="form-check mt-4">
-                <input class="form-check-input" type="radio" name="did_read" id="did_read" value="1">
-                <label class="form-check-label" for="did_read">
+                <input class="form-check-input" type="radio" name="didRead" id="didRead" value="1">
+                <label class="form-check-label" for="didRead">
                   I Did read the book
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="did_read" id="did_not_read" value="0" checked>
-                <label class="form-check-label" for="did_not_read">
+                <input class="form-check-input" type="radio" name="didRead" id="didNotRead" value="0" checked>
+                <label class="form-check-label" for="didNotRead">
                   I Didn't read the book
                 </label>
               </div>

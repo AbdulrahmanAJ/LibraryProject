@@ -10,6 +10,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
+    // Assosiating the author with the books
+    Reader.associate = (models) => {
+        Reader.hasMany(models.Book, {
+            foreignKey: 'readerId'
+          });
+    }
 
     return Reader
   }

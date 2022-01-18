@@ -3,41 +3,41 @@
 
 <div class="container p-3">
     <h1 class="mt-5">Books</h1>
-    <form action="/deleteBook" method="post">
-        <select name="book_id" id="" required>
+    <form action="/modifydelete/Book" method="post">
+        <select name="bookId" id="" required>
             <% for( let i = 0; i < books.length; i++ ) { %>
-                <option value="<%= books[i].book_id %>"><%= books[i].book_name %></option>
+                <option value="<%= books[i].bookId %>"><%= books[i].bookName %></option>
             <% } %>
         </select>
         <button type="submit">delete</button>
     </form>
 
     <h1 class="mt-5">Genres</h1>
-    <form action="/deleteGenre" method="post">
-        <select name="genre_id" id="" required>
+    <form action="/modify/delete/Genre" method="post">
+        <select name="genreId" id="" required>
             <% for( let i = 0; i < genres.length; i++ ) { %>
-                <option value="<%= genres[i].genre_id %>"><%= genres[i].genre_name %></option>
+                <option value="<%= genres[i].genreId %>"><%= genres[i].genreName %></option>
             <% } %>
         </select>
         <button type="submit">delete</button>
     </form>
 
     <h1 class="mt-5">Authors</h1>
-    <form action="/deleteAuthor" method="post">
-        <select name="author_id" id="" required>
+    <form action="/modify/delete/Author" method="post">
+        <select name="authorId" id="" required>
             <% for( let i = 0; i < authors.length; i++ ) { %>
-                <option value="<%= authors[i].author_id %>"><%= authors[i].author_name %></option>
+                <option value="<%= authors[i].authorId %>"><%= authors[i].authorName %></option>
             <% } %>
         </select>
         <button type="submit">delete</button>
     </form>
 
     <h1 class="mt-5">Readers</h1>
-    <form action="/deleteReader" method="post">
-        <select name="reader_id" id="" required>
+    <form action="/modify/delete/Reader" method="post">
+        <select name="readerId" id="" required>
             <% for( let i = 0; i < readers.length; i++ ) { %>
-                <% if (readers[i].reader_id != 0) { %>
-                    <option value="<%= readers[i].reader_id %>"><%= readers[i].reader_name %></option>    
+                <% if (readers[i].readerId != 0) { %>
+                    <option value="<%= readers[i].readerId %>"><%= readers[i].readerName %></option>    
                 <% } %>
                 
             <% } %>
