@@ -6,6 +6,7 @@ var controller = require('../controllers/pages.controller')
 
 // create the routing
 router.get('/', controller.getForMainPage)
+router.get('/books', controller.getForBooks)
 
 
 

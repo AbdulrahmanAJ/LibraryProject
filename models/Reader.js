@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
         readerId : {
             type: DataTypes.INTEGER,
             autoIncrement: true,
-            primaryKey: true
+            primaryKey: true,
+            unique: true
         },
         readerName : {
             type: DataTypes.STRING
@@ -16,6 +17,6 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'readerId'
           });
     }
-
+    
     return Reader
   }

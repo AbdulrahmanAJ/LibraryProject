@@ -3,7 +3,7 @@
 
 <div class="container p-3">
     <h1 class="mt-5">Books</h1>
-    <form action="/modifydelete/Book" method="post">
+    <form action="/modify/delete/Book" method="post">
         <select name="bookId" id="" required>
             <% for( let i = 0; i < books.length; i++ ) { %>
                 <option value="<%= books[i].bookId %>"><%= books[i].bookName %></option>

@@ -1,17 +1,17 @@
 var db = require('../models')
-var author = db.Author
-var book = db.Book
-var genre = db.Genre
-var reader = db.Reader
+var Author = db.Author
+var Book = db.Book
+var Genre = db.Genre
+var Reader = db.Reader
 
 
 
 // create the routing
 exports.getForMainPage = async (req, res) => {
-    const authors = await author.findAll();
-    const genres = await genre.findAll();
-    const readers = await reader.findAll();
-    const books = await book.findAll();
+    const authors = await Author.findAll();
+    const genres = await Genre.findAll();
+    const readers = await Reader.findAll();
+    const books = await Book.findAll();
 
     res.render("all",  {
         authors,
@@ -19,4 +19,19 @@ exports.getForMainPage = async (req, res) => {
         readers,
         books
     })
+}
+
+exports.getForBooks = async (req, res) => {
+    const books = await Book.findAll({include: { all: true }});
+    const genres = await Genre.findAll();
+
+    
+
+    res.send({books, genres})
+}
+
+exports.getForAuthors = async (req, res) => {
+
+
+    res.redirect('/')
 }
