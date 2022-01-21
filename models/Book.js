@@ -21,9 +21,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             defaultValue: 1
         },
-        readerId: {
-            type: DataTypes.INTEGER,
-            
+        loanerId: {
+            type: DataTypes.INTEGER,       
         },
         didRead: {
             type: DataTypes.BOOLEAN,
@@ -34,10 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     // create the associations
     Book.associate = (models) => {
         Book.belongsTo(models.Author, { foreignKey: 'authorId', allowNull: true });
-        Book.belongsTo(models.Genre, { foreignKey: 'genreId' });
-        Book.belongsTo(models.Reader, { foreignKey: 'readerId', allowNull: true });
+        Book.belongsTo(models.Genre, { foreignKey: 'genreId' , allowNull: false});
+        Book.belongsTo(models.Loaner, { foreignKey: 'loanerId', allowNull: true });
     }
-
-
+    
     return Book;
   }
