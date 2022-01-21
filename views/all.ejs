@@ -16,11 +16,11 @@
     <% for( let i = 0; i < genres.length; i++ ) { %>
         <h3><%= genres[i].genreName %> </h3>
     <% } %>
-    
-    <h1 class="mt-5">Readers</h1>
-    <% for( let i = 0; i < readers.length; i++ ) { %>
-        <h3><%= readers[i].readerName %> </h3>
-    <% } %>
+
+    <% genresTrial.rows.forEach(book => { %>
+        <h1><%= book.name %> </h1>
+    <% }) %>
+
     
 </div>
 

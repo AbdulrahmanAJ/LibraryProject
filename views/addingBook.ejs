@@ -7,7 +7,13 @@
         <!-- book name -->
         <div class="col-md-6">
             <label for="bookName" class="form-label">Book Name</label>
-            <input type="text" class="form-control" id="bookName" name="bookName" required placeholder="Ex. Atomic Habit" autocomplete="off">
+            <input type="text" class="form-control" list="bookNamesList" id="bookName" name="bookName" required placeholder="Ex. Atomic Habit" autocomplete="off">
+            <!-- TODO: make a datalist -->
+            <datalist id="bookNamesList">
+                <% books.forEach(book => { %> 
+                    <option><%= book.bookName %></option>
+                <%}) %>
+            </datalist>
         </div>
 
         <!-- book author -->
@@ -15,10 +21,33 @@
             <label for="authorName" class="form-label">Author Name</label>
             <input class="form-control" list="authorNamesList" id="authorName" placeholder="Type Author Name..." name="authorName" autocomplete="off">
             <datalist id="authorNamesList">
-                <% for( let i = 0; i < authors.length; i++ ) { %>
-                    <option><%= authors[i].authorName %></option>
-                <% } %>
+                <% authors.forEach(author => { %> 
+                    <option><%= author.authorName %></option>
+                <%}) %>
             </datalist>
+        </div>
+
+        
+        <!-- book genre -->
+        <div class="col-md-6">
+            <label for="genreId" class="form-label">Book Genre</label> 
+            <select class="form-select " aria-label="Default select example" id="genreId" name="genreId" onchange="addNewGenre(this);" required>
+                <!-- make a list for the genre -->
+                <option selected disabled value="">Choose Genre</option >
+                <% genres.forEach(genre => { %>
+                    <option value="<%= genre.genreId %>"><%= genre.genreName %></option>
+                <% }) %>
+                <option value="-1">Add New Genre...</option>
+            </select>
+
+            <!-- one is hidden and the other is shown, when the user choose "Add new Author the second will be shown" -->
+            <div class="input-group mb-3 d-none" id="genreNameInputGroup">
+                <input class="form-control" type="text" id="genreName" name="genreName" placeholder="Ex. Novel" autocomplete="off" value="empty" required>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" id="backToGenreId" type="button" onclick="selectGenre();">back</button>
+                </div>
+            </div>
+            
         </div>
 
         <!-- book pages -->
@@ -27,26 +56,6 @@
             <input type="number" class="form-control" id="bookPages" name="bookPages" placeholder="Ex. 252" >
         </div>
 
-        
-        <!-- book genre -->
-        <div class="col-md-3">
-            <label for="genreId" class="form-label">Book Genre</label> 
-            <div class="input-group mb-3">
-                <select class="form-select" aria-label="Default select example" id="genreId" name="genreId" required>
-                    <!-- make a list for the genre -->
-                    <option selected disabled>Choose Genre</option >
-                    <% for( let i = 0; i < genres.length; i++ ) { %>
-                        <option value="<%= genres[i].genreId %>"><%= genres[i].genreName %></option>
-                    <% } %>
-                </select>
-            </div>
-        </div>
-
-        <!-- book copy -->
-        <div class="col-md-3">
-            <label for="bookCopy" class="form-label">Book Copy</label>
-            <input type="number" class="form-control" id="bookCopy" name="bookCopy"  value="1">
-        </div>
 
         <!-- read or no -->
         <div class="col-md-3">
@@ -66,7 +75,7 @@
 
         <!-- submit button -->
         <div class="col-12">
-            <button type="submit" class="btn btn-dark">Add Book</button>
+            <button type="submit" class="btn btn-primary">Add Book</button>
         </div>
 
     </form>

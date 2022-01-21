@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true
         },
         authorName : {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            unique: true
         }
     }) 
   

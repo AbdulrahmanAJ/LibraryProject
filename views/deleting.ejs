@@ -32,18 +32,6 @@
         <button type="submit">delete</button>
     </form>
 
-    <h1 class="mt-5">Readers</h1>
-    <form action="/modify/delete/Reader" method="post">
-        <select name="readerId" id="" required>
-            <% for( let i = 0; i < readers.length; i++ ) { %>
-                <% if (readers[i].readerId != 0) { %>
-                    <option value="<%= readers[i].readerId %>"><%= readers[i].readerName %></option>    
-                <% } %>
-                
-            <% } %>
-        </select>
-        <button type="submit">delete</button>
-    </form>
 
 
 </div>

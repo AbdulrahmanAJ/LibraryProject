@@ -46,32 +46,6 @@
         
     </div>
 
-
-    <!-- Readers -->
-
-    <div class="col-md-4 px-4">
-        <h3 class="mb-4">Readers</h3>
-        <form action="/modify/add/Reader" method="post">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" name="readerName" id="readerName" required>
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Reader</button>
-            </div>
-        </form>
-
-        <label for="currentReaders" class="form-label">Current Readers</label>
-
-        <select class="form-select" size="10" aria-label="size 3 select example" id="currentReaders">
-            <!-- make a loop for the Readers -->
-            <% for( let i = 0; i < readers.length; i++ ) { %>
-                <% if (readers[i].readerId != 0 ) { %>
-                    <option ><%= readers[i].readerName %></option>
-                <% } %>
-            <% } %>
-        </select>
-        
-    </div>
-    
-
 </div>
 
 <%- include('layout/footer') %>
