@@ -1,0 +1,31 @@
+<%- include('layout/header') %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-8 ">
+      <%- include('layout/messages') %>
+        <h2>Login Here!</h2>
+        <form action="/users/login" method="post">
+    
+          <div class="mb-3">
+            <label for="userName" class="form-label">User Name</label>
+            <input type="text" class="form-control" id="userName" aria-describedby="userNameHelp" name="userName"
+              required autofocus autocomplete="off" value="<%= typeof userName != 'undefined' ? userName : '' %>">
+          </div>
+      
+          <div class="mb-3">
+            <label for="userPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="userPassword" name="userPassword"
+              required >
+          </div>
+      
+          <button type="submit" class="btn btn-primary">Login</button>
+
+        </form>
+        <p class="mt-2">Don't Have An Account? <a href="/users/register">Register</a></p>
+      </div>
+    </div>
+</div>
+
+
+<%- include('layout/footer') %>

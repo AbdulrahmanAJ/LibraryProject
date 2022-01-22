@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         Genre.hasMany(models.Book, {
             foreignKey: 'genreId',
             allowNull:true
-          });
+        });
+        Genre.belongsTo(models.User, { foreignKey: 'userId', allowNull: true });
     }
 
     return Genre

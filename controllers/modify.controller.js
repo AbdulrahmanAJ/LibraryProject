@@ -13,7 +13,6 @@ exports.getAdding = async (req, res) => {
     })
     
 }
-
 exports.postAdd = async (req, res) => {
     await db[req.params.model].create( req.body );
     res.redirect('/modify/adding');
@@ -29,7 +28,6 @@ exports.getDeleting = async (req, res) => {
         authors, genres, books
     })
 }
-
 exports.postDelete = async (req, res) => {
     await db[req.params.model].destroy( {where: req.body})
     res.redirect('/modify/deleting');
@@ -41,10 +39,9 @@ exports.getAddingBook = async (req, res) => {
     const genres = await Genre.findAll();
     
     res.render("addingBook",  {
-        authors, genres, books
+        authors, genres, books, user:req.user
     })
 }
-
 exports.postAddBook = async (req, res) => {
     
     // make trim to the book name
@@ -66,7 +63,7 @@ exports.postAddBook = async (req, res) => {
     
     if (!(req.body.bookPages)) delete req.body.bookPages; // make sure if there is a book pages
 
-    // check for the bookcopy
+    // check for the book copy
     var currentCopy = await Book.max('bookCopy', { where: {bookName:req.body.bookName} }).catch(err => console.log(err)); // 10
     if (currentCopy) req.body.bookCopy = currentCopy + 1;
 

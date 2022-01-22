@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         authorName : {
             type: DataTypes.STRING,
+            allowNull:false,
             unique: true
         }
     }) 
@@ -15,8 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     Author.associate = (models) => {
         Author.hasMany(models.Book, {
             foreignKey: 'authorId'
-          });
+        });
+        Author.belongsTo(models.User, { foreignKey: 'userId', allowNull: true });
     }
+    
 
 
     return Author

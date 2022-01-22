@@ -1,7 +1,9 @@
 <%- include('layout/header') %>
+<%- include('layout/messages') %> 
 
+    <h1 class="mt-5">User</h1>
+    <h3><%= user.userId %> </h3>
 
-<div class="container p-3">
     <h1 class="mt-5">Books</h1>
     <% for( let i = 0; i < books.length; i++ ) { %>
         <h3><%= books[i].bookName %> </h3>
@@ -21,8 +23,6 @@
         <h1><%= book.name %> </h1>
     <% }) %>
 
-    
-</div>
 
 
 

@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     }) 
   
-    // Assosiating the Loaner with the books
+    // Associating the Loaner with the books
     Loaner.associate = (models) => {
         Loaner.hasMany(models.Book, {
             foreignKey: 'loanerId'
-          });
+        });
+        Loaner.belongsTo(models.User, { foreignKey: 'userId', allowNull: true });
     }
 
 

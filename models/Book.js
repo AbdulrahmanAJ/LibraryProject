@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         Book.belongsTo(models.Author, { foreignKey: 'authorId', allowNull: true });
         Book.belongsTo(models.Genre, { foreignKey: 'genreId' , allowNull: false});
         Book.belongsTo(models.Loaner, { foreignKey: 'loanerId', allowNull: true });
+        Book.belongsTo(models.User, { foreignKey: 'userId', allowNull: true });
     }
     
     return Book;

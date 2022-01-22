@@ -2,19 +2,22 @@ var db = require('../models')
 var Author = db.Author
 var Book = db.Book
 var Genre = db.Genre
+const User = db.User
 var Sequelize = require('sequelize')
 
 
 
 // create the routing
 exports.getForMainPage = async (req, res) => {
-    const authors = await Author.findAll();
-    const genres = await Genre.findAll();
-    const genresTrial = await Genre.findAndCountAll();
-    const books = await Book.findAll();
+    const authors = await Author.findAll().catch(err => console.log(err));
+    const genres = await Genre.findAll().catch(err => console.log(err));
+    const genresTrial = await Genre.findAndCountAll().catch(err => console.log(err));
+    const books = await Book.findAll().catch(err => console.log(err));
+    const user = req.user;
 
+    // var user = {userId:'1323'}
     res.render("all",  {
-        authors, genres, books, genresTrial
+        authors, genres, books, genresTrial, user
     })
 }
 
@@ -45,7 +48,7 @@ exports.getForBooks = async (req, res) => {
     }
     
     res.render('books',{
-        genres, books
+        genres, books, user:req.user
     })
     // res.send({
     //     genres, books
@@ -85,6 +88,6 @@ exports.getForAuthors = async (req, res) => {
     //     authors
     // })
     res.render('authors', {
-        authors
+        authors, user:req.user
     })
 }
