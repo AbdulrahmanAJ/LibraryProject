@@ -3,16 +3,18 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const fs = require('fs');
 const path = require('path');
-const { DEC8_BIN } = require('mysql/lib/protocol/constants/charsets');
 const basename = path.basename(__filename);
 const db = {};
 
 
 // Passing parameters separately (other dialects)
-const sequelize = new Sequelize(config.database, config.username, config.password, {
-  host: config.host,
-  dialect: config.dialect
-});
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
+
 
 // checking if the database is connected
 try {
