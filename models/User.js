@@ -26,19 +26,19 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = (models) => {
         User.hasMany(models.Book, {
             foreignKey: 'userId',
-            allowNull:true //TODO:
+            allowNull:false //TODO:
           });
           User.hasMany(models.Genre, {
             foreignKey: 'userId',
-            allowNull:true //TODO:
+            allowNull:false //TODO:
           });
           User.hasMany(models.Author, {
             foreignKey: 'userId',
-            allowNull:true //TODO:
+            allowNull:false //TODO:
           });
           User.hasMany(models.Loaner, {
             foreignKey: 'userId',
-            allowNull:true //TODO:
+            allowNull:false //TODO:
           });
     }
 

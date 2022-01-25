@@ -1,14 +1,14 @@
 <%- include('layout/header') %>
 
-<div class="container-sm px-5 py-4">
-    <h1 class="my-3">Adding New Book Form</h1>
+<div class="container">
+    <h1 class="mb-3 ">Adding a New Book</h1>
     <form action="/modify/addBook" method="post" class="row g-3">
         
         <!-- book name -->
         <div class="col-md-6">
             <label for="bookName" class="form-label">Book Name</label>
             <input type="text" class="form-control" list="bookNamesList" id="bookName" name="bookName" required placeholder="Ex. Atomic Habit" autocomplete="off">
-            <!-- TODO: make a datalist -->
+            <!-- make a datalist -->
             <datalist id="bookNamesList">
                 <% books.forEach(book => { %> 
                     <option><%= book.bookName %></option>
@@ -42,10 +42,15 @@
 
             <!-- one is hidden and the other is shown, when the user choose "Add new Author the second will be shown" -->
             <div class="input-group mb-3 d-none" id="genreNameInputGroup">
-                <input class="form-control" type="text" id="genreName" name="genreName" placeholder="Ex. Novel" autocomplete="off" value="empty" required>
+                <input class="form-control" type="text" id="genreName" name="genreName" placeholder="Ex. Novel" autocomplete="off" value="empty" list="genreNamesList" required>
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary" id="backToGenreId" type="button" onclick="selectGenre();">back</button>
                 </div>
+                <datalist id="genreNamesList">
+                    <% genres.forEach(genre => { %> 
+                        <option><%= genre.genreName %></option>
+                    <%}) %>
+                </datalist>
             </div>
             
         </div>

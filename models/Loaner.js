@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         Loaner.hasMany(models.Book, {
             foreignKey: 'loanerId'
         });
-        Loaner.belongsTo(models.User, { foreignKey: 'userId', allowNull: true });
+        Loaner.belongsTo(models.User, { foreignKey: 'userId', allowNull: false });
     }
 
 

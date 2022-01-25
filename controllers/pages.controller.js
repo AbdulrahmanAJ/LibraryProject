@@ -9,23 +9,29 @@ var Sequelize = require('sequelize')
 
 // create the routing
 exports.getForMainPage = async (req, res) => {
-    const authors = await Author.findAll().catch(err => console.log(err));
-    const genres = await Genre.findAll().catch(err => console.log(err));
-    const genresTrial = await Genre.findAndCountAll().catch(err => console.log(err));
-    const books = await Book.findAll().catch(err => console.log(err));
     const user = req.user;
+    const authors = await Author.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
+    const genres = await Genre.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
+    const books = await Book.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
 
     // var user = {userId:'1323'}
     res.render("all",  {
-        authors, genres, books, genresTrial, user
+        authors, genres, books, user
     })
 }
 
 exports.getForBooks = async (req, res) => {
-    const books = await Book.findAndCountAll({ include: { all: true, nested: true }
+    const user = req.user;
+
+    const books = await Book.findAndCountAll({
+        where: {userId: user.userId},
+        include: {all: true}
     }).catch(err => console.log(err));
+    console.log(books);
+    // res.send(books)
 
     const genres = await Genre.findAll({
+        where : {userId: user.userId},
          include: {
             all:true,
             nested:true,
@@ -33,11 +39,12 @@ exports.getForBooks = async (req, res) => {
     }).catch(err => console.log(err));
 
     const genresCount = await Genre.findAll({
+        where: {userId: user.userId},
         attributes: { 
-            include: [ [Sequelize.fn("COUNT", Sequelize.col("books.bookId")), "booksCount"]],
+            include: [[Sequelize.fn("COUNT", Sequelize.col("books.bookId")), "booksCount"]],
         },
         include: {
-            model: Book, attributes: [], all: true
+            model: Book, attributes: [], all: true, where: {userId: user.userId}
         },
         group: ['Genre.genreId']
     }).catch(err => console.log(err));
@@ -48,7 +55,7 @@ exports.getForBooks = async (req, res) => {
     }
     
     res.render('books',{
-        genres, books, user:req.user
+        genres, books, user
     })
     // res.send({
     //     genres, books
@@ -57,8 +64,10 @@ exports.getForBooks = async (req, res) => {
 }
 
 exports.getForAuthors = async (req, res) => {
+    const user = req.user;
 
     const authors = await Author.findAll({
+        where: {userId: user.userId},
          include: {
             all:true,
             nested:true,
@@ -66,11 +75,12 @@ exports.getForAuthors = async (req, res) => {
     }).catch(err => console.log(err));
 
     const authorsCount = await Author.findAll({
+        where: {userId: user.userId},
         attributes: { 
             include: [ [Sequelize.fn("COUNT", Sequelize.col("books.bookId")), "booksCount"]],
         },
         include: {
-            model: Book, attributes: [], all: true
+            model: Book, attributes: [], all: true, where: {userId: user.userId}
         },
         group: ['Author.authorId']
     }).catch(err => console.log(err));
@@ -88,6 +98,6 @@ exports.getForAuthors = async (req, res) => {
     //     authors
     // })
     res.render('authors', {
-        authors, user:req.user
+        authors, user
     })
 }

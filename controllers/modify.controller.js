@@ -34,42 +34,54 @@ exports.postDelete = async (req, res) => {
 }
 
 exports.getAddingBook = async (req, res) => {
-    const books = await Book.findAll({attributes:['bookName'] , group: 'bookName' }).catch(err => console.log(err));
-    const authors = await Author.findAll();
-    const genres = await Genre.findAll();
+    const user = req.user;
+    const books = await Book.findAll({attributes:['bookName'], group: 'bookName', where:{userId:user.userId} }).catch(err => console.log(err));
+    const authors = await Author.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
+    const genres = await Genre.findAll({where: {userId: user.userId}}).catch(err => console.log(err));;
     
     res.render("addingBook",  {
-        authors, genres, books, user:req.user
+        authors, genres, books, user
     })
 }
 exports.postAddBook = async (req, res) => {
-    
-    // make trim to the book name
-    req.body.bookName = req.body.bookName.trim();
-    
-    if (req.body.authorName) { // make sure if there is an author name
+    // get the user from the request
+    const user = req.user;
+
+    // make sure if there is an author name
+    if (req.body.authorName) {
         const [author] = await Author.findOrCreate({  // create an author if the author name is not founded
-            where: {authorName: req.body.authorName.trim()},
+            where: {authorName: req.body.authorName.trim(), userId:user.userId},
         });
         req.body.authorId = author.authorId // insert the author Id to the request
+    } else {
+        delete req.body.authorName;
     }
-    
-    if (req.body.genreId == '-1') { // it checks if the user added a new genre
-        const [genre] = await Genre.findOrCreate({  // create a user name if not founded
-            where: {genreName: req.body.genreName.trim()},
+
+    // it checks if the user added a new genre
+    if (req.body.genreId == '-1') { 
+        const [genre] = await Genre.findOrCreate({  // create a genre if not founded
+            where: {genreName: req.body.genreName.trim(), userId:user.userId},
         });
         req.body.genreId = genre.genreId // insert the genre Id to the request
     }
-    
-    if (!(req.body.bookPages)) delete req.body.bookPages; // make sure if there is a book pages
+
+    // make sure if there is a book pages
+    if (!(req.body.bookPages)) delete req.body.bookPages;
 
     // check for the book copy
-    var currentCopy = await Book.max('bookCopy', { where: {bookName:req.body.bookName} }).catch(err => console.log(err)); // 10
+    var currentCopy = await Book.max('bookCopy', { where: {bookName:req.body.bookName, userId: user.userId} }).catch(err => console.log(err));
     if (currentCopy) req.body.bookCopy = currentCopy + 1;
+    
+    // make trim to the book name
+    req.body.bookName = req.body.bookName.trim();
 
-    console.log(req.body)
+    // insert the user Id to req.body
+    req.body.userId = user.userId
+
     // create the book    
-    await Book.create(req.body).catch(err => console.log(err))
+    console.log(req.body)
+    await Book.create(req.body).catch(err => console.log(err));
 
+    req.flash('success_msg','Book Has Been Added!');
     res.redirect('/');
 }
