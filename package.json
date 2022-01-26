@@ -13,14 +13,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@heroku/buildpack-registry": "^1.0.1",
+    "async-file": "^2.0.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
+    "cli-ux": "^6.0.8",
     "connect-flash": "^0.1.1",
     "dotenv": "^14.3.1",
     "ejs": "^3.1.6",
     "ejs-locals": "^1.0.2",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
+    "got": "^12.0.1",
     "heroku": "^7.59.2",
     "heroku-cli": "^7.0.9",
     "morgan": "^1.10.0",
@@ -28,6 +32,7 @@
     "mysql2": "^2.3.3",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
+    "phoenix": "^1.6.6",
     "sequelize": "^6.13.0"
   }
 }
