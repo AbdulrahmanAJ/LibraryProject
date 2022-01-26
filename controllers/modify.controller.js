@@ -83,5 +83,5 @@ exports.postAddBook = async (req, res) => {
     await Book.create(req.body).catch(err => console.log(err));
 
     req.flash('success_msg','Book Has Been Added!');
-    res.redirect('/');
+    res.redirect('/modify/addingBook');
 }
