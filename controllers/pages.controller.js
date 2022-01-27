@@ -2,7 +2,6 @@ var db = require('../models')
 var Author = db.Author
 var Book = db.Book
 var Genre = db.Genre
-const User = db.User
 var Sequelize = require('sequelize')
 
 
@@ -22,6 +21,7 @@ exports.getForMainPage = async (req, res) => {
 
 exports.getForBooks = async (req, res) => {
     const user = req.user;
+
 
     const books = await Book.findAndCountAll({
         where: {userId: user.userId},
@@ -50,11 +50,14 @@ exports.getForBooks = async (req, res) => {
     }).catch(err => console.log(err));
 
     // insert the booksCount to the genres
-    for (let i = 0; i < genres.length; i++) {    
-        genres[i].booksCount = genresCount[i].dataValues.booksCount
+    for (let i = 0; i < genres.length; i++) {
+        if (genresCount[i]){
+            genres[i].booksCount = genresCount[i].dataValues.booksCount
+        }
+        if (! genres[i].booksCount) delete genres[i];
     }
     
-    res.render('books',{
+    res.render('books copy',{
         genres, books, user
     })
     // res.send({

@@ -7,6 +7,7 @@ const logger = require('morgan');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const {ensureAuthenticated} = require("./config/auth.js")
 
 
 // set up the view engines
@@ -45,10 +46,9 @@ app.use((req,res,next) => {
 })
 
 // create the routing
-const {ensureAuthenticated} = require("./config/auth.js")
 
 app.use('/users', require('./routes/users.router'))
-app.use('/', ensureAuthenticated, require('./routes/pages.router'))
+app.use('/', require('./routes/pages.router'))
 app.use('/modify', require('./routes/modify.router'))
 
 

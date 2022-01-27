@@ -7,8 +7,8 @@ const {ensureAuthenticated} = require("../config/auth.js")
 
 // create the routing
 router.get('/', ensureAuthenticated, controller.getForMainPage)
-router.get('/books', controller.getForBooks)
-router.get('/authors', controller.getForAuthors)
+router.get('/books', ensureAuthenticated, controller.getForBooks)
+router.get('/authors', ensureAuthenticated, controller.getForAuthors)
 
 
 

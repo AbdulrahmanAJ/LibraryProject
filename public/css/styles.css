@@ -1,4 +1,43 @@
-.grid-icon {
-    background-color:#800000;
-    
+    /* Container holding the image and the text */
+.image-container {
+    color: black;
+    background-color: whitesmoke;
+    /* opacity: 0.0; */
+    position: relative;
+    width: 100%;
+    /* z-index: ; */
 }
+
+
+/* Top right text */
+.image-top {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 80%;
+    transform: translate(-50%, -50%);
+}
+
+    /* Bottom right text */
+.image-bottom {
+    position: absolute;
+    width: 80%;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-cover {
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 10px #000;
+
+}
+
+
+/***** Zoom *****/
+
+.zoom:hover{
+    transform: scale(1.05);
+    transition: all ease 500ms;
+  }

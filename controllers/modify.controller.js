@@ -29,7 +29,7 @@ exports.getDeleting = async (req, res) => {
     })
 }
 exports.postDelete = async (req, res) => {
-    await db[req.params.model].destroy( {where: req.body})
+    await db[req.params.model].destroy( {where: req.body}).catch(err => console.log(err))
     res.redirect('/modify/deleting');
 }
 
@@ -80,8 +80,13 @@ exports.postAddBook = async (req, res) => {
 
     // create the book    
     console.log(req.body)
-    await Book.create(req.body).catch(err => console.log(err));
+    const newBook = await Book.create(req.body).catch((err) => {
+        req.flash('error_msg','Something Went Wrong!');
+        res.redirect('/modify/addingBook');
+    });
 
-    req.flash('success_msg','Book Has Been Added!');
-    res.redirect('/modify/addingBook');
+    if (newBook){
+        req.flash('success_msg','Book Has Been Added!');
+        res.redirect('/modify/addingBook');
+    }
 }
