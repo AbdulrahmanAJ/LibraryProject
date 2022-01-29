@@ -3,13 +3,56 @@
   <% books.forEach(book => { %>
     <div class="col-sm-4">
       <div class="container px-4 py-3">
-    
-        <div class="image-container zoom">
+        
+      
+        <div class="image-container zoom" onclick="openModal('book<%= book.bookId %>Modal'); console.log('Hello');">
           <img src="/images/book-cover.png" class="image-cover zoom" data-mdb-animation-start="onHover">
           <div class="image-top text-wrap "><h3 class="fw-bold fst-italic text-center"><%= book.bookName %></h3></div>
           <div class="image-bottom text-wrap align-baseline"><h4 class="fw-bold fst-italic text-center"><%= book.Author.authorName %></h4></div>
-        </div> 
+          <!-- <button type="button" class="btn btn-primary image-button" data-bs-toggle="modal" data-bs-target="#book<%= book.bookId %>Modal" >See book Details</button> -->
+        </div>
       </div>
+
+      <!-- Modal -->
+      <div class="modal fade " id="book<%= book.bookId %>Modal" tabindex="-1" aria-labelledby="book<%= book.bookId %>Modal" aria-hidden="true">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="book<%= book.bookId %>ModalLabel"><%= book.bookName %></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- The book modal form -->
+            <div class="book-modal-info" id="book<%= book.bookId %>-modal-info">
+              <div class="modal-body">
+                <h1>Book Data</h1>
+                <%= book.Author.authorName %>
+                <%= book.Genre.genreName %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" onclick="changeModalType('<%= book.bookId %>');">Edit</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Close</button>
+              </div>
+            </div>
+
+            <!-- The book modal form -->
+            <div class="book-modal-form d-none" id="book<%= book.bookId %>-modal-form">
+              <form action="/modify/editBook" method="post">
+                <div class="modal-body">
+                  <h1>Book Edit form</h1>
+                  This is the form
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-info" onclick="changeModalType('<%= book.bookId %>');">back</button>
+                  <button type="submit" class="btn btn-primary">Submit form</button>
+                </div>
+              </div>
+              </form>
+            
+          </div>
+        </div>
+      </div>
+
     
     </div>
    

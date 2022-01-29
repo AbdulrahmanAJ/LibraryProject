@@ -14,7 +14,7 @@ function addNewGenre(obj) {
     }
 }
 
-// a funciton that show the select input and hide the text input
+// a function that show the select input and hide the text input
 function selectGenre() {
     var textInput = document.getElementById('genreName');
     textInput.value = 'empty';
@@ -24,4 +24,33 @@ function selectGenre() {
     var selectInput = document.getElementById('genreId');
     selectInput.value = '';
     selectInput.classList.remove('d-none');
+}
+
+
+// a function that open the modal when the user click on the book
+function openModal(modalId) {
+    var bookModal = new bootstrap.Modal(document.getElementById(modalId), {
+        keyboard: false
+      })
+    bookModal.toggle();
+    //   var bookModal = document.getElementById(modalId);
+}
+
+
+// a function that change the modal type from info to form and the opposite
+function changeModalType(bookId){
+    // book-modal-form
+    var bookModalForm = document.getElementById(`book${bookId}-modal-form`);
+    var bookModalInfo = document.getElementById(`book${bookId}-modal-info`);
+
+    // this means that the modal now in the info part
+    if (bookModalForm.classList.contains('d-none')){
+        bookModalForm.classList.remove('d-none');
+        bookModalInfo.classList.add('d-none');
+    }
+    else if (bookModalInfo.classList.contains('d-none')){
+        bookModalForm.classList.add('d-none');
+        bookModalInfo.classList.remove('d-none');
+    }
+
 }

@@ -31,7 +31,21 @@
     height: 100%;
     width: 100%;
     box-shadow: 0 0 10px #000;
+}
 
+
+/* show the button when we hover the button */
+.image-button {
+    display: none;
+    position: absolute;
+    width: 80%;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+.image-container:hover .image-button {
+    display: inline-block;
 }
 
 
@@ -40,4 +54,4 @@
 .zoom:hover{
     transform: scale(1.05);
     transition: all ease 500ms;
-  }
+}
