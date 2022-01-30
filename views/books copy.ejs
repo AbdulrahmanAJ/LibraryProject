@@ -111,9 +111,10 @@
     <!-- A loop for each genre -->
     <% genres.forEach(genre => { %>
       <div class="tab-pane fade" id="genre<%= genre.genreId %>">
+        // TODO: check if the genre has books
         <!-- The table of the genre -->
         <div class="container mt-3">
-          <h3 class="my-3">Books Count: <%= genre.booksCount %> </h3>
+          <h3 class="my-3">Books Count: <%= genre.Books.length %> </h3>
           <table class="table">
             <thead>
               <tr>

@@ -15,5 +15,7 @@ router.post('/delete/:model', controller.postDelete);
 router.get('/addingBook', ensureAuthenticated, controller.getAddingBook)
 router.post('/addBook', ensureAuthenticated, controller.postAddBook)
 
+router.post('/editBook', ensureAuthenticated, controller.postEditBook)
+
 
 module.exports = router

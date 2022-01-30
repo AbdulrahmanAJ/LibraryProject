@@ -1,4 +1,4 @@
-// a funciton that hide the select input and show the text input
+// a function that hide the select input and show the text input
 function addNewGenre(obj) {
     // it checks that the user selected 'add new genre'
     var selectedValue = obj.options[obj.selectedIndex].value;
@@ -33,7 +33,6 @@ function openModal(modalId) {
         keyboard: false
       })
     bookModal.toggle();
-    //   var bookModal = document.getElementById(modalId);
 }
 
 
@@ -42,6 +41,7 @@ function changeModalType(bookId){
     // book-modal-form
     var bookModalForm = document.getElementById(`book${bookId}-modal-form`);
     var bookModalInfo = document.getElementById(`book${bookId}-modal-info`);
+    var fieldset = document.getElementById
 
     // this means that the modal now in the info part
     if (bookModalForm.classList.contains('d-none')){

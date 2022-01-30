@@ -38,24 +38,6 @@ exports.getForBooks = async (req, res) => {
         }
     }).catch(err => console.log(err));
 
-    const genresCount = await Genre.findAll({
-        where: {userId: user.userId},
-        attributes: { 
-            include: [[Sequelize.fn("COUNT", Sequelize.col("books.bookId")), "booksCount"]],
-        },
-        include: {
-            model: Book, attributes: [], all: true, where: {userId: user.userId}
-        },
-        group: ['Genre.genreId']
-    }).catch(err => console.log(err));
-
-    // insert the booksCount to the genres
-    for (let i = 0; i < genres.length; i++) {
-        if (genresCount[i]){
-            genres[i].booksCount = genresCount[i].dataValues.booksCount
-        }
-        if (! genres[i].booksCount) delete genres[i];
-    }
     
     res.render('books copy',{
         genres, books, user
@@ -77,22 +59,6 @@ exports.getForAuthors = async (req, res) => {
         }
     }).catch(err => console.log(err));
 
-    const authorsCount = await Author.findAll({
-        where: {userId: user.userId},
-        attributes: { 
-            include: [ [Sequelize.fn("COUNT", Sequelize.col("books.bookId")), "booksCount"]],
-        },
-        include: {
-            model: Book, attributes: [], all: true, where: {userId: user.userId}
-        },
-        group: ['Author.authorId']
-    }).catch(err => console.log(err));
-
-    // insert the booksCount to the authors
-    for (let i = 0; i < authors.length; i++) {    
-        authors[i].booksCount = authorsCount[i].dataValues.booksCount
-        authors[i].dataValues.booksCount = authorsCount[i].dataValues.booksCount
-    }
     
     // sort the authors by the highest booksCount
     authors.sort((a, b) => (a.booksCount < b.booksCount) ? 1 : -1)

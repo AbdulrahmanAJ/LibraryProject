@@ -90,3 +90,8 @@ exports.postAddBook = async (req, res) => {
         res.redirect('/modify/addingBook');
     }
 }
+
+exports.postEditBook = async (req, res) => {
+    console.log(req.body);
+    res.send(req.body)
+}
