@@ -54,3 +54,9 @@ function changeModalType(bookId){
     }
 
 }
+
+
+// dataTable
+$(document).ready( function () {
+    $('#booksTable').DataTable();
+} );
