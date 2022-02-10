@@ -29,10 +29,10 @@ function selectGenre() {
 
 // a function that open the modal when the user click on the book
 function openModal(modalId) {
-    var bookModal = new bootstrap.Modal(document.getElementById(modalId), {
-        keyboard: false
-      })
+    console.log(modalId);
+    var bookModal = new bootstrap.Modal(document.getElementById(modalId), {})
     bookModal.toggle();
+    
 }
 
 
@@ -56,7 +56,36 @@ function changeModalType(bookId){
 }
 
 
-// dataTable
-$(document).ready( function () {
-    $('#booksTable').DataTable();
-} );
+let books = []
+
+// The search bar in the grid view
+function searchBook(searchValue, id) {
+    let booksCovers = document.getElementsByClassName('bookCover')
+
+    
+    // insert the book that matches the search value in the books list
+    for (let i = 0; i < booksCovers.length; i++) {
+        const bookCover = booksCovers[i];
+        const bookName = bookCover.getAttribute('bookname')
+        const authorName = bookCover.getAttribute('authorname')
+        const genreId = bookCover.getAttribute('genreId')
+        const isVisible =  bookName.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            authorName.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            genreId != id;
+        
+        // if (isVisible && genreId==id) console.log(bookName, authorName, isVisible);
+        bookCover.classList.toggle("d-none", !isVisible)
+    }
+
+}
+
+// Data table
+$(document).ready(() => {
+    // make a table
+    var table = $('table.display').DataTable({
+        
+    }); 
+
+    // var bookCovers = 
+
+})

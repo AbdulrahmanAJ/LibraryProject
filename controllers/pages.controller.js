@@ -2,6 +2,7 @@ var db = require('../models')
 var Author = db.Author
 var Book = db.Book
 var Genre = db.Genre
+var Loaner = db.Loaner
 var Sequelize = require('sequelize')
 
 
@@ -23,19 +24,18 @@ exports.getForBooks = async (req, res) => {
     const user = req.user;
 
 
-    const books = await Book.findAndCountAll({
+    const books = await Book.findAll({
         where: {userId: user.userId},
         include: {all: true}
     }).catch(err => console.log(err));
-    console.log(books);
     // res.send(books)
 
     const genres = await Genre.findAll({
         where : {userId: user.userId},
-         include: {
-            all:true,
-            nested:true,
-        }
+         include: [{
+            model:Book,
+            include: [Author, Genre, Loaner]
+        }]
     }).catch(err => console.log(err));
 
     
@@ -51,22 +51,30 @@ exports.getForBooks = async (req, res) => {
 exports.getForAuthors = async (req, res) => {
     const user = req.user;
 
-    const authors = await Author.findAll({
-        where: {userId: user.userId},
-         include: {
-            all:true,
-            nested:true,
-        }
+    const authors = await Genre.findAll({
+        where : {userId: user.userId},
+         include: [{
+            model:Book,
+            include: [Author, Genre, Loaner]
+        }]
     }).catch(err => console.log(err));
+
+    // const authors = await Author.findAll({
+    //     where: {userId: user.userId},
+    //      include: {
+    //         all:true,
+    //         nested:true,
+    //     }
+    // }).catch(err => console.log(err));
 
     
     // sort the authors by the highest booksCount
     authors.sort((a, b) => (a.booksCount < b.booksCount) ? 1 : -1)
 
-    // res.send({
-    //     authors
-    // })
-    res.render('authors', {
-        authors, user
+    res.send({
+        authors
     })
+    // res.render('authors', {
+    //     authors, user
+    // })
 }

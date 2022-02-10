@@ -1,32 +1,47 @@
-<div class="row">
+<div class="container ">
 
-  <% books.forEach(book => { %>
-    <div class="col-sm-4">
-      <div class="container px-4 py-3">
-        
-      
-        <div class="image-container zoom" onclick="openModal('book<%= book.bookId %>Modal'); console.log('Hello');">
-          <img src="/images/book-cover.png" class="image-cover zoom" data-mdb-animation-start="onHover">
-          <div class="image-top text-wrap "><h3 class="fw-bold fst-italic text-center"><%= book.bookName %></h3></div>
-          <div class="image-bottom text-wrap align-baseline"><h4 class="fw-bold fst-italic text-center"><%= book.Author.authorName %></h4></div>
-          <!-- <button type="button" class="btn btn-primary image-button" data-bs-toggle="modal" data-bs-target="#book<%= book.bookId %>Modal" >See book Details</button> -->
+  <!-- The search bar -->
+  <div class="input-group rounded w-80">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="searchBook" id="searchBook" onkeyup="searchBook(this.value, '<%= id%>');"/>
+    <span class="input-group-text border-0" id="search-addon">
+      <i class="bi bi-search"></i>
+    </span>
+  </div>
+  
+    <!-- <label for="searchBook" class="me-auto w-100">
+      Search:
+      <input type="search" name="searchBook" id="searchBook" class="w-50 " onkeyup="searchBook(this.value, '<%= id%>');">
+    </label> -->
+  <!-- </div> -->
+
+
+
+  <div class="row booksCovers " id="booksCovers<%= id %>">
+    <% books.forEach(book => { %>
+      <!-- Book cover -->
+      <div class="col-sm-4 bookCover" bookname="<%= book.bookName %>" authorname="<%= book.Author.authorName %>" genreId = '<%= id %>'>
+        <div class="container px-4 py-3">
+          <div class="image-container zoom" onclick="openModal('book<%= book.bookId %>Genre<%= id %>Modal');" id="<%= book.bookId %>-<%= book.Genre.genreName %>-<%= book.bookName %>">
+            <img src="/images/book-cover.png" class="image-cover zoom" data-mdb-animation-start="onHover">
+            <div class="image-top text-wrap "><h3 class="fw-bold fst-italic text-center"><%= book.bookName %></h3></div>
+            <div class="image-bottom text-wrap align-baseline"><h4 class="fw-bold fst-italic text-center"><%= book.Author.authorName %></h4></div>
+          </div>
         </div>
+  
       </div>
-
       <!-- Modal -->
-      <div class="modal fade " id="book<%= book.bookId %>Modal" tabindex="-1" aria-labelledby="book<%= book.bookId %>Modal" aria-hidden="true">
+      <div class="modal fade " id="book<%= book.bookId %>Genre<%= id %>Modal" tabindex="-1" aria-labelledby="book<%= book.bookId %>Genre<%= id %>Modal" aria-hidden="true">
         <div class="modal-dialog ">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="book<%= book.bookId %>ModalLabel"><%= book.bookName %></h5>
+              <h5 class="modal-title" id="book<%= book.bookId %>Genre<%= id %>ModalLabel"><%= book.bookName %></h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
           
-            <!-- The book modal form -->
+            <!-- The book modal info -->
             <div class="book-modal-info" id="book<%= book.bookId %>-modal-info">
               <div class="modal-body">
                 <fieldset disabled>
-                  
                   <div class="row">
                     <div class="col-12">
                       <div class="mb-3">
@@ -71,9 +86,7 @@
                       </div>
                     </div>
                   </div>
-                  
                 </fieldset>
-                
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-info" onclick="changeModalType('<%= book.bookId %>');">Edit</button>
@@ -135,17 +148,15 @@
                   <button type="button" class="btn btn-info" onclick="changeModalType('<%= book.bookId %>');">back</button>
                   <button type="submit" class="btn btn-primary">Submit form</button>
                 </div>
-              </div>
               </form>
-            
+            </div>
+
           </div>
         </div>
       </div>
+    <% }) %>
+  
+  </div>  
+</div>
 
-    
-    </div>
-   
-  <% }) %>
-
-</div>  
   

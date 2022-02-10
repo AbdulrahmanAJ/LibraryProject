@@ -1,0 +1,46 @@
+<div class="w-100" >
+    <table class="table display" id="dataTable" class="dataTable w-100">
+    <!-- <table class="table table-striped table-hover table-primary"> -->
+        <thead>
+        <tr>
+            <th scope="col">name</th>
+            <th scope="col">author</th>
+            <th scope="col">pages</th>
+            <th scope="col">genre</th>
+            <th scope="col">book copy</th>
+            <th scope="col">loaned</th>
+            <th scope="col">did read</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% books.forEach(book => { %>
+            <tr>
+            <td><%= book.bookName %> </td>
+            <% if (book.Author) { %>
+                <td><%= book.Author.authorName %></td>
+            <% } else { %>
+                <td>unKnown</td>
+            <% } %>
+            <% if (book.bookPages) { %>
+                <td><%= book.bookPages %></td>
+            <% } else { %>
+                <td>unknown</td>
+            <% } %>
+            <td><%= book.Genre.genreName %> </td>
+            <td><%= book.bookCopy %> </td>
+            <% if (book.Loaner) { %>
+                <td><%= book.Loaner.loanerName %></td>
+                <% } else { %>
+                <td>NO</td>
+            <% } %>
+    
+            <% if (book.didRead == 1) { %>
+                <td>YES</td>
+            <% } else { %>
+                <td>NO</td>
+            <% } %>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</div>
