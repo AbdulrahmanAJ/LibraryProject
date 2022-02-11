@@ -38,9 +38,16 @@ exports.getForBooks = async (req, res) => {
         }]
     }).catch(err => console.log(err));
 
+    const authors = await Author.findAll({
+        where : {userId: user.userId}
+    })
+
+    const loaners = await Loaner.findAll({
+        where : {userId: user.userId}
+    })
     
-    res.render('books copy',{
-        genres, books, user
+    res.render('books',{
+        genres, books, user, authors, loaners
     })
     // res.send({
     //     genres, books

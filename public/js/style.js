@@ -1,7 +1,7 @@
 // a function that hide the select input and show the text input
-function addNewGenre(obj) {
+function addNewGenre(selectInput) {
     // it checks that the user selected 'add new genre'
-    var selectedValue = obj.options[obj.selectedIndex].value;
+    var selectedValue = selectInput.options[selectInput.selectedIndex].value;
 
     if (selectedValue == -1) {
         var selectInput = document.getElementById('genreId');
@@ -27,12 +27,11 @@ function selectGenre() {
 }
 
 
-// a function that open the modal when the user click on the book
-function openModal(modalId) {
-    console.log(modalId);
-    var bookModal = new bootstrap.Modal(document.getElementById(modalId), {})
+// a function that open the book modal when the user click on the book cover
+function openModal(bookId) {
+    var bookModalId =  `book${bookId}Modal`
+    var bookModal = new bootstrap.Modal(document.getElementById(bookModalId), {})
     bookModal.toggle();
-    
 }
 
 
@@ -52,6 +51,26 @@ function changeModalType(bookId){
         bookModalForm.classList.add('d-none');
         bookModalInfo.classList.remove('d-none');
     }
+
+}
+
+function changeTheme(isDark) {
+    console.log(isDark);
+    const lightThemeLink = document.getElementById("lightThemeLink");
+    const darkThemeLink = document.getElementById("darkThemeLink");
+
+    if (isDark) {
+        lightThemeLink.removeAttribute('href')
+        darkThemeLink.setAttribute("href", "/css/darkly.min.css")
+        // lightThemeLink.removeAttribute('rel')
+        // darkThemeLink.setAttribute("rel", "stylesheet")
+    } else {
+        darkThemeLink.removeAttribute('href')
+        lightThemeLink.setAttribute("href", "/css/flaty.min.css")
+        // darkThemeLink.removeAttribute('rel')
+        // lightThemeLink.setAttribute("rel", "stylesheet")
+    }
+
 
 }
 

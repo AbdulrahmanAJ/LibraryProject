@@ -43,7 +43,7 @@ exports.getAddingBook = async (req, res) => {
         authors, genres, books, user
     })
 }
-exports.postAddBook = async (req, res) => {
+exports.postAddAndEditBook = async (req, res) => {
     // get the user from the request
     const user = req.user;
 
@@ -80,18 +80,71 @@ exports.postAddBook = async (req, res) => {
 
     // create the book    
     console.log(req.body)
-    const newBook = await Book.create(req.body).catch((err) => {
+    
+    var newBook;
+    if (req.body.bookId) {
+        const bookId = req.body.bookId;
+        delete req.body.bookId;
+        newBook = await Book.update(req.body, {
+            where: {
+                userId: user.userId,
+                bookId
+            }
+          }).catch(() => {
+            req.flash('error_msg','Something Went Wrong!');
+            res.redirect('/books');
+          });
+          if (newBook){
+            req.flash('success_msg','Book Has Been Edited!');
+            // res.redirect(`/books/#book${ bookId }Covers0`);
+            res.redirect(`/books/`);
+        }
+
+    }
+
+    newBook = await Book.create(req.body).catch((err) => {
         req.flash('error_msg','Something Went Wrong!');
         res.redirect('/modify/addingBook');
     });
+    
+    
+
 
     if (newBook){
         req.flash('success_msg','Book Has Been Added!');
+        res.redirect('/modify/addingBook');
+    } else {
+        req.flash('error_msg','Something Went Wrong!');
         res.redirect('/modify/addingBook');
     }
 }
 
 exports.postEditBook = async (req, res) => {
+    // get the user from the request
+    const user = req.user;
+
+    // make sure if there is an author name
+    if (req.body.authorName) {
+        const [author] = await Author.findOrCreate({  // create an author if the author name is not founded
+            where: {authorName: req.body.authorName.trim(), userId:user.userId},
+        });
+        req.body.authorId = author.authorId // insert the author Id to the request
+    } else {
+        delete req.body.authorName;
+    }
+
+    // it checks if the user added a new genre
+    if (req.body.genreId == '-1') { 
+        const [genre] = await Genre.findOrCreate({  // create a genre if not founded
+            where: {genreName: req.body.genreName.trim(), userId:user.userId},
+        });
+        req.body.genreId = genre.genreId // insert the genre Id to the request
+    }
+
+    // make sure if there is a book pages
+    if (!(req.body.bookPages)) delete req.body.bookPages;
+
+
     console.log(req.body);
     res.send(req.body)
 }

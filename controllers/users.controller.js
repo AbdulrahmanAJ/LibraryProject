@@ -17,37 +17,6 @@ exports.postLogin = async (req, res, next) => {
     (req,res,next)
 }
 
-// exports.postLogin = async (req, res) => {
-//     var errors = [];
-//     var {userName, userPassword} = req.body;
-
-//     // check if the input is valid
-//     if (!(userName && userPassword)){
-//         req.flash('error_msg','Enter User Name, Password and check the Password!');
-//         return res.redirect('/users/login');
-//     }
-
-//     // check if the user exists
-//     var user;
-//     user = await User.findOne( {where: {userName} }).catch(err => console.log(err));
-//     if ( !user ) {
-//         req.flash('error_msg','No Matched User Name!');
-//         return res.redirect('/users/login');
-//     }
-
-//     // check if the user and the password does match
-//     // user = 
-//     var correctPassword = await bcrypt.compare(userPassword, user.userHash);
-//     if ( !correctPassword ) {
-//         req.flash('error_msg','User Name and Password Does Not Match!');
-//         return res.redirect('/users/login');
-//     }
-
-//     // TODO: the user is valid
-//     req.flash('success_msg','You have now Logged In!')
-//     res.redirect('/')
-// }
-
 
 exports.getForRegister = async (req, res) => {
     res.render('register')

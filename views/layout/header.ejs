@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="/css/flaty.min.css" rel="stylesheet" id="lightThemeLink">
+    <link href="" rel="stylesheet" id="darkThemeLink">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="/images/logoBlack.png"  type="image/ico" />
     <link href="/css/styles.css" rel="stylesheet" >
@@ -45,7 +46,8 @@
             <a class="nav-link" href="/users/register"><span class="align-middle fs-5">Register</span></a>
           </li>
         </ul>
-    <% } else { %> 
+
+        <% } else { %> 
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
@@ -58,11 +60,27 @@
             <a class="nav-link " href="/modify/addingBook"><span class="align-middle fs-5">Add Book</span></a>
           </li>
         </ul>
-        <li class="navbar-nav ms-auto ">
-          <a class="nav-link text-success" href="/users/logout"><span class="align-middle fs-5">Logout</span></a>
-        </li>
-      </div>
-    <% } %> 
+
+      <li class="navbar-nav me-2">
+        <a class="nav-link text-success" href="/users/logout"><span class="align-middle fs-5">Logout</span></a>
+      </li>
+    <% } %>
+        <div class=" ms-1 me-3">
+          <input type="checkbox" class="theme-checkbox " id="chk" onchange="changeTheme(this.checked);"/>
+          <label class="theme-label" for="chk">
+            <i class="bi bi-sun-fill"></i>
+            <i class="bi bi-moon-fill"></i>
+            <div class="ball"></div>
+          </label>
+        </div>
+
+    <% if(!( typeof user == 'undefined')) { %>
+
+    <% } %>
+
+
+    </div>
+    
 
 
   </div>

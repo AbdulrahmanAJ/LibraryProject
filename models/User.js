@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         userHash: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              notNull: { args: true, msg: "You must enter a password" }
-            }
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
+          notNull: { args: true, msg: "You must enter a password" }
         }
+      }
     })
 
     // Associating the user with the books

@@ -19,140 +19,15 @@
   <div class="row booksCovers " id="booksCovers<%= id %>">
     <% books.forEach(book => { %>
       <!-- Book cover -->
-      <div class="col-sm-4 bookCover" bookname="<%= book.bookName %>" authorname="<%= book.Author.authorName %>" genreId = '<%= id %>'>
+      <div class="col-sm-4 bookCover" bookname="<%= book.bookName %>" authorname="<%= book.Author.authorName %>" genreId = '<%= id %>' id="book<% book.bookId %>Covers<%= id %>"  >
         <div class="container px-4 py-3">
-          <div class="image-container zoom" onclick="openModal('book<%= book.bookId %>Genre<%= id %>Modal');" id="<%= book.bookId %>-<%= book.Genre.genreName %>-<%= book.bookName %>">
+          <div class="image-container zoom" onclick="openModal('<%= book.bookId %>');" id="<%= book.bookId %>-<%= book.Genre.genreName %>-<%= book.bookName %>">
             <img src="/images/book-cover.png" class="image-cover zoom" data-mdb-animation-start="onHover">
             <div class="image-top text-wrap "><h3 class="fw-bold fst-italic text-center"><%= book.bookName %></h3></div>
             <div class="image-bottom text-wrap align-baseline"><h4 class="fw-bold fst-italic text-center"><%= book.Author.authorName %></h4></div>
           </div>
         </div>
   
-      </div>
-      <!-- Modal -->
-      <div class="modal fade " id="book<%= book.bookId %>Genre<%= id %>Modal" tabindex="-1" aria-labelledby="book<%= book.bookId %>Genre<%= id %>Modal" aria-hidden="true">
-        <div class="modal-dialog ">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="book<%= book.bookId %>Genre<%= id %>ModalLabel"><%= book.bookName %></h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-          
-            <!-- The book modal info -->
-            <div class="book-modal-info" id="book<%= book.bookId %>-modal-info">
-              <div class="modal-body">
-                <fieldset disabled>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="mb-3">
-                        <label for="disabledBookName" class="form-label">Book Name</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="<%= book.bookName %> ">
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="mb-3">
-                        <label for="disabledAuthorName" class="form-label">Author Name</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="<%= book.Author.authorName %> ">
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="mb-3">
-                        <label for="disabledGenreName" class="form-label">Genre</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="<%= book.Genre.genreName %> ">
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="mb-3">
-                        <label for="disabledLoanerName" class="form-label">Loaner</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Not Loaned">
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="mb-3">
-                        <label for="disabledGenreNgenre" class="form-label">bookPages</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="<%= book.bookPages %> ">
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="mb-3">
-                        <label for="disabledBookCopy" class="form-label">book Copy</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="<%= book.bookCopy %> ">
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="mb-3">
-                        <label for="disabledDidRead" class="form-label">did Read</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="<%= book.didRead %> ">
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-info" onclick="changeModalType('<%= book.bookId %>');">Edit</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Close</button>
-              </div>
-            </div>
-
-            <!-- The book modal form -->
-            <div class="book-modal-form d-none" id="book<%= book.bookId %>-modal-form">
-              <form action="/modify/editBook" method="post">
-                <div class="modal-body">
-                  <input class="d-none" value="<%= book.bookId %>" name="bookId">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="mb-3">
-                        <label for="disabledBookName" class="form-label">Book Name</label>
-                        <input type="text" id="disabledTextInput" class="form-control" value="<%= book.bookName %>" name="bookName">
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="mb-3">
-                        <label for="disabledAuthorName" class="form-label">Author Name</label>
-                        <input type="text" id="disabledTextInput" class="form-control" value="<%= book.Author.authorName %>" name="authorName">
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="mb-3">
-                        <label for="disabledGenreName" class="form-label">Genre</label>
-                        <input type="text" id="disabledTextInput" class="form-control" value="<%= book.Genre.genreName %>" name="genreName">
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="mb-3">
-                        <label for="disabledLoanerName" class="form-label">Loaner</label>
-                        <input type="text" id="disabledTextInput" class="form-control" value="Not Loaned">
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="mb-3">
-                        <label for="disabledGenreNgenre" class="form-label">bookPages</label>
-                        <input type="text" id="disabledTextInput" class="form-control" value="<%= book.bookPages %>" name="bookPages">
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="mb-3">
-                        <label for="disabledBookCopy" class="form-label">book Copy</label>
-                        <input type="text" id="disabledTextInput" class="form-control" value="<%= book.bookCopy %>" name="bookCopy">
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="mb-3">
-                        <label for="disabledDidRead" class="form-label">did Read</label>
-                        <input type="text" id="disabledTextInput" class="form-control" value="<%= book.didRead %>" name="didRead">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-info" onclick="changeModalType('<%= book.bookId %>');">back</button>
-                  <button type="submit" class="btn btn-primary">Submit form</button>
-                </div>
-              </form>
-            </div>
-
-          </div>
-        </div>
       </div>
     <% }) %>
   
