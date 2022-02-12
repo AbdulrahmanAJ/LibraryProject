@@ -9,15 +9,18 @@ var Sequelize = require('sequelize')
 
 // create the routing
 exports.getForMainPage = async (req, res) => {
-    const user = req.user;
-    const authors = await Author.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
-    const genres = await Genre.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
-    const books = await Book.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
+    res.redirect('/books')
 
-    // var user = {userId:'1323'}
-    res.render("all",  {
-        authors, genres, books, user
-    })
+
+    // const user = req.user;
+    // const authors = await Author.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
+    // const genres = await Genre.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
+    // const books = await Book.findAll({where: {userId: user.userId}}).catch(err => console.log(err));
+
+    // // var user = {userId:'1323'}
+    // res.render("all",  {
+    //     authors, genres, books, user
+    // })
 }
 
 exports.getForBooks = async (req, res) => {
@@ -66,7 +69,24 @@ exports.getForAuthors = async (req, res) => {
         }]
     }).catch(err => console.log(err));
 
-    console.log(authors);
+    const books = await Book.findAll({
+        where: {userId: user.userId},
+        include: {all: true}
+    }).catch(err => console.log(err));
+    // res.send(books)
+
+    const genres = await Genre.findAll({
+        where : {userId: user.userId},
+         include: [{
+            model:Book,
+            include: [Author, Genre, Loaner]
+        }]
+    }).catch(err => console.log(err));
+
+    const loaners = await Loaner.findAll({
+        where : {userId: user.userId}
+    })
+
     // sort the authors by the highest booksCount
     authors.sort((a, b) => (a.booksCount < b.booksCount) ? 1 : -1)
 
@@ -74,6 +94,6 @@ exports.getForAuthors = async (req, res) => {
     //     authors
     // })
     res.render('authors', {
-        authors, user
+        authors, user, books, loaners, genres
     })
 }

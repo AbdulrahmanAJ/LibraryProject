@@ -28,12 +28,19 @@ function selectGenre() {
 
 
 // a function that open the book modal when the user click on the book cover
-function openModal(bookId) {
+function openBookModal(bookId) {
     var bookModalId =  `book${bookId}Modal`
     var bookModal = new bootstrap.Modal(document.getElementById(bookModalId), {})
     bookModal.toggle();
 }
 
+// a function that open the book modal when the user click on the book cover
+function openAuthorModal(authorId) {
+    var authorModalId =  `author${authorId}Modal`
+    var authorModal = new bootstrap.Modal(document.getElementById(authorModalId), {})
+    console.log(authorModal);
+    authorModal.toggle();
+}
 
 // a function that change the modal type from info to form and the opposite
 function changeModalType(bookId){
@@ -98,6 +105,24 @@ function searchBook(searchValue, id) {
 
 }
 
+// The search of authors
+function searchAuthor(searchValue) {
+    let authorsCards = document.getElementsByClassName('authorCard')
+    
+    // insert the book that matches the search value in the books list
+    for (let i = 0; i < authorsCards.length; i++) {
+        const authorCard = authorsCards[i];
+        const authorName = authorCard.getAttribute('authorname');
+        const isVisible =  authorName.toLowerCase().includes(searchValue.toLowerCase());
+        
+        // console.log(bookName, authorName, isVisible);
+        authorCard.classList.toggle("d-none", !isVisible);
+    }
+
+}
+
+
+
 // Data table
 $(document).ready(() => {
     // make a table
@@ -108,3 +133,4 @@ $(document).ready(() => {
     // var bookCovers = 
 
 })
+

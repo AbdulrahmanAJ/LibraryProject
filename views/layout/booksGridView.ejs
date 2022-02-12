@@ -7,27 +7,18 @@
       <i class="bi bi-search"></i>
     </span>
   </div>
-  
-    <!-- <label for="searchBook" class="me-auto w-100">
-      Search:
-      <input type="search" name="searchBook" id="searchBook" class="w-50 " onkeyup="searchBook(this.value, '<%= id%>');">
-    </label> -->
-  <!-- </div> -->
-
-
 
   <div class="row booksCovers " id="booksCovers<%= id %>">
     <% books.forEach(book => { %>
       <!-- Book cover -->
       <div class="col-sm-4 bookCover" bookname="<%= book.bookName %>" authorname="<%= book.Author.authorName %>" genreId = '<%= id %>' id="book<% book.bookId %>Covers<%= id %>"  >
         <div class="container px-4 py-3">
-          <div class="image-container zoom" onclick="openModal('<%= book.bookId %>');" id="<%= book.bookId %>-<%= book.Genre.genreName %>-<%= book.bookName %>">
+          <div class="image-container zoom" onclick="openBookModal('<%= book.bookId %>');" id="<%= book.bookId %>-<%= book.Genre.genreName %>-<%= book.bookName %>">
             <img src="/images/book-cover.png" class="image-cover zoom" data-mdb-animation-start="onHover">
             <div class="image-top text-wrap "><h3 class="fw-bold fst-italic text-center"><%= book.bookName %></h3></div>
             <div class="image-bottom text-wrap align-baseline"><h4 class="fw-bold fst-italic text-center"><%= book.Author.authorName %></h4></div>
           </div>
         </div>
-  
       </div>
     <% }) %>
   

@@ -18,11 +18,10 @@
             <!-- The authors cards -->
             <% authors.forEach(author => { %>
                 <% if (author.Books.length != 0) { %>
-                    <div class="col-sm-3 my-2">
-                        <div class="card text-white bg-secondary border-dark zoom">
+                    <div class="col-sm-3 my-2 authorCard"  authorname="<%= author.authorName %>">
+                        <div class="card text-white bg-secondary border-dark zoom" onclick="openAuthorModal('<%= author.authorId %>');">
                             <div class="card-header">
                                 <h5 class="card-title"><%= author.authorName %></h5>
-    
                             </div>
                             <div class="card-body">
                                 <p class="card-text">has <%= author.Books.length %> books</p>
@@ -33,7 +32,50 @@
             <% }) %>
         </div>
     </div>
-
-
 </div>
+
+
+<!-- The authors modals -->
+<% authors.forEach(author => { %>
+    <div class="modal fade" id="author<%= author.authorId %>Modal" tabindex="-1" aria-labelledby="author<%= author.authorId %>ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="author<%= author.authorId %>ModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <% author.Books.forEach(book => { %>
+                        
+
+                            <div class="col-4 bookCover" bookname="<%= book.bookName %>" authorname="<%= book.Author.authorName %>" id="book<% book.bookId %>Covers" >
+                                <div class="container px-4 py-3">
+                                    <div class="image-container zoom" onclick="openBookModal('<%= book.bookId %>');" >
+                                        <img src="/images/book-cover.png" class="image-cover zoom" data-mdb-animation-start="onHover">
+                                        <div class="image-center text-wrap "><h5 class="fw-bold fst-italic text-center"><%= book.bookName %></h5></div>
+                                    </div>
+                                </div>
+                            </div>
+                    <% }) %>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+<% }) %>
+
+
+
+
+
+<%- include('layout/booksModals', {books, genres, loaners, authors})%>
+
+
 <%- include('layout/footer') %>
