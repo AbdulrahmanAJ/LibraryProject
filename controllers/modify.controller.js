@@ -96,8 +96,8 @@ exports.postAddAndEditBook = async (req, res) => {
           });
           if (newBook){
             req.flash('success_msg','Book Has Been Edited!');
-            // res.redirect(`/books/#book${ bookId }Covers0`);
             res.redirect(`/books/`);
+            // res.redirect(`/books/#book${ bookId }Covers0`);
         }
 
     }
@@ -106,9 +106,6 @@ exports.postAddAndEditBook = async (req, res) => {
         req.flash('error_msg','Something Went Wrong!');
         res.redirect('/modify/addingBook');
     });
-    
-    
-
 
     if (newBook){
         req.flash('success_msg','Book Has Been Added!');
@@ -119,32 +116,58 @@ exports.postAddAndEditBook = async (req, res) => {
     }
 }
 
-exports.postEditBook = async (req, res) => {
+exports.postDeleteBook = async (req, res) => {
     // get the user from the request
-    const user = req.user;
+    const userId = req.user.userId;
+    const bookId = req.body.bookId;
 
-    // make sure if there is an author name
-    if (req.body.authorName) {
-        const [author] = await Author.findOrCreate({  // create an author if the author name is not founded
-            where: {authorName: req.body.authorName.trim(), userId:user.userId},
-        });
-        req.body.authorId = author.authorId // insert the author Id to the request
-    } else {
-        delete req.body.authorName;
-    }
+    // try to delete the book if done redirect and send success message
+    // Delete everyone named "Jane"
+    await Book.destroy({
+        where: {
+            userId, bookId
+        }
+    })
+    // .then(() => {
+    // })
+    .catch(() => {
+        req.flash('error_msg','Failed to delete the book');
+        res.redirect('/books');
+    });
 
-    // it checks if the user added a new genre
-    if (req.body.genreId == '-1') { 
-        const [genre] = await Genre.findOrCreate({  // create a genre if not founded
-            where: {genreName: req.body.genreName.trim(), userId:user.userId},
-        });
-        req.body.genreId = genre.genreId // insert the genre Id to the request
-    }
-
-    // make sure if there is a book pages
-    if (!(req.body.bookPages)) delete req.body.bookPages;
-
-
-    console.log(req.body);
-    res.send(req.body)
+    req.flash('success_msg','Book Has Been Deleted!');
+    res.redirect(`/books`);
+  
 }
+
+
+// exports.postEditBook = async (req, res) => {
+//     // get the user from the request
+//     const user = req.user;
+
+//     // make sure if there is an author name
+//     if (req.body.authorName) {
+//         const [author] = await Author.findOrCreate({  // create an author if the author name is not founded
+//             where: {authorName: req.body.authorName.trim(), userId:user.userId},
+//         });
+//         req.body.authorId = author.authorId // insert the author Id to the request
+//     } else {
+//         delete req.body.authorName;
+//     }
+
+//     // it checks if the user added a new genre
+//     if (req.body.genreId == '-1') { 
+//         const [genre] = await Genre.findOrCreate({  // create a genre if not founded
+//             where: {genreName: req.body.genreName.trim(), userId:user.userId},
+//         });
+//         req.body.genreId = genre.genreId // insert the genre Id to the request
+//     }
+
+//     // make sure if there is a book pages
+//     if (!(req.body.bookPages)) delete req.body.bookPages;
+
+
+//     console.log(req.body);
+//     res.send(req.body)
+// }
+

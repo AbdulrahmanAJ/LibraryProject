@@ -16,6 +16,7 @@ router.get('/addingBook', ensureAuthenticated, controller.getAddingBook)
 router.post('/addBook', ensureAuthenticated, controller.postAddAndEditBook)
 
 router.post('/editBook', ensureAuthenticated, controller.postAddAndEditBook)
+router.post('/deleteBook', ensureAuthenticated, controller.postDeleteBook)
 
 
 module.exports = router

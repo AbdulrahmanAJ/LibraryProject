@@ -1,0 +1,78 @@
+<%- include('layout/header') %>
+
+
+<div class="container p-auto mt-5">
+
+  <div class="d-flex align-items-start">
+    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <!-- make a special condition for the first author -->
+      <% for( let i = 0; i < authors.length; i++ ) { %>
+        <% if (i==0) { %>
+          <button class="nav-link active btn-secondary btn bg-secondary text-white " id="v-pills-<%= authors[i].authorId %>-tab" data-bs-toggle="pill" data-bs-target="#v-pills-<%= authors[i].authorId %>" type="button" role="tab" aria-controls="v-pills-<%= authors[i].authorId %>" aria-selected="true"><%= authors[i].authorName %></button>
+        <% } else { %>
+          <button class="nav-link btn-secondary btn bg-secondary text-white mt-1" id="v-pills-<%= authors[i].authorId %>-tab" data-bs-toggle="pill" data-bs-target="#v-pills-<%= authors[i].authorId %>" type="button" role="tab" aria-controls="v-pills-<%= authors[i].authorId %>" aria-selected="false"><%= authors[i].authorName %></button>
+        <% } %>
+      <% } %>
+    </div>
+
+
+    <!-- the content part -->
+    <div class="tab-content" id="v-pills-tabContent">
+      <!-- // TODO: check if the authors has books -->
+      <% for( let i = 0; i < authors.length; i++ ) { %>
+        <% if (i == 0) { %>
+          <div class="tab-pane fade show active" id="v-pills-<%= authors[i].authorId %>" role="tabpanel" aria-labelledby="v-pills-<%= authors[i].authorId %>-tab">
+        <% } else { %>
+          <div class="tab-pane fade" id="v-pills-<%= authors[i].authorId %>" role="tabpanel" aria-labelledby="v-pills-<%= authors[i].authorId %>-tab">
+        <% } %>
+          <h3 class="my-3">Books Count: <%= authors[i].Books.length %> </h3>
+          <table class="table ">
+          <!-- <table class="table table-striped table-hover table-primary"> -->
+            <thead>
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">pages</th>
+                <th scope="col">genre</th>
+                <th scope="col">book copy</th>
+                <th scope="col">loaned</th>
+                <th scope="col">did read</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% authors[i].Books.forEach(book => { %>
+                <tr>
+                  <td><%= book.bookName %> </td>
+                  <% if (book.bookPages) { %>
+                    <td><%= book.bookPages %></td>
+                  <% } else { %>
+                    <td>unknown</td>
+                  <% } %>
+                  <td><%= book.Genre.genreName %> </td>
+                  <td><%= book.bookCopy %> </td>
+                  <% if (book.Loaner) { %>
+                    <td><%= book.Loaner.loanerName %></td>
+                    <% } else { %>
+                      <td>NO</td>
+                  <% } %>
+    
+                  <% if (book.didRead == 1) { %>
+                    <td>YES</td>
+                  <% } else { %>
+                    <td>NO</td>
+                  <% } %>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>    
+
+      <% } %>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+<%- include('layout/footer') %>

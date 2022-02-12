@@ -1,4 +1,5 @@
 <% books.forEach(book => { %>
+  <!-- Book Modals -->
     <div class="modal fade" id="book<%= book.bookId %>Modal" tabindex="-1" aria-labelledby="book<%= book.bookId %>Modal" aria-hidden="true">
       <div class="modal-dialog ">
         <div class="modal-content">
@@ -173,12 +174,40 @@
   
               </div>
               <div class="modal-footer">
+                <button type="button" class="btn btn-danger ms-1 me-auto" data-bs-toggle="modal" data-bs-target="#book<%= book.bookId %>DeleteModal" >Delete</button>
                 <button type="button" class="btn btn-info" onclick="changeModalType('<%= book.bookId %>');">back</button>
                 <button type="submit" class="btn btn-primary">Submit form</button>
               </div>
             </form>
           </div>
   
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Confirmation delete modal -->
+    <div class="modal fade" id="book<%= book.bookId %>DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form action="/modify/deleteBook" method="post">
+            <input class="d-none" value="<%= book.bookId %>" name="bookId">
+            
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirm Book Deletion</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+  
+            <div class="modal-body">
+              Are you sure you want to delete the <%= book.bookCopy %>th of "<%= book.bookName %> "?
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger">Delete Book</button>
+            </div>
+            
+          </form>
         </div>
       </div>
     </div>

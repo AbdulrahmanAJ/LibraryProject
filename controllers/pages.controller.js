@@ -58,30 +58,22 @@ exports.getForBooks = async (req, res) => {
 exports.getForAuthors = async (req, res) => {
     const user = req.user;
 
-    const authors = await Genre.findAll({
+    const authors = await Author.findAll({
         where : {userId: user.userId},
-         include: [{
+        include: [{
             model:Book,
             include: [Author, Genre, Loaner]
         }]
     }).catch(err => console.log(err));
 
-    // const authors = await Author.findAll({
-    //     where: {userId: user.userId},
-    //      include: {
-    //         all:true,
-    //         nested:true,
-    //     }
-    // }).catch(err => console.log(err));
-
-    
+    console.log(authors);
     // sort the authors by the highest booksCount
     authors.sort((a, b) => (a.booksCount < b.booksCount) ? 1 : -1)
 
-    res.send({
-        authors
-    })
-    // res.render('authors', {
-    //     authors, user
+    // res.send({
+    //     authors
     // })
+    res.render('authors', {
+        authors, user
+    })
 }

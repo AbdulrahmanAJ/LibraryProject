@@ -18,7 +18,7 @@
     transform: translate(-50%, -50%);
 }
 
-    /* Bottom right text */
+/* Bottom right text */
 .image-bottom {
     position: absolute;
     width: 80%;
@@ -32,22 +32,6 @@
     width: 100%;
     box-shadow: 0 0 10px #000;
 }
-
-
-/* show the button when we hover the button */
-.image-button {
-    display: none;
-    position: absolute;
-    width: 80%;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-}
-.image-container:hover .image-button {
-    display: inline-block;
-}
-
 
 /***** Zoom *****/
 
