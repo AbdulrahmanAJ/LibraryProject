@@ -12,7 +12,7 @@
 /* Top text */
 .image-top {
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 50%;
     width: 80%;
     transform: translate(-50%, -50%);
@@ -56,8 +56,8 @@
     background-color: var(--bs-danger);
 }
 .theme-label {
-    background-color: var(--bs-dark);
-	/* background-color: #303030; */
+    /* background-color: #95a5a6; */
+    background-color: #212529;
 	border-radius: 40px;
 	cursor: pointer;
 	display: flex;
@@ -66,17 +66,17 @@
 	padding: 5px;
 	position: relative;
 	height: 21px;
-	width: 40px;
+	width: 42px;
 	transform: scale(1.5);
 }
 .theme-checkbox:checked + .theme-label {
-	/* background-color: #adb5bd; */
-	background-color: var(--bs-light);
-
+    /* background-color: #f8f9fa; */
+    background-color: #f8f9fa;
 }
 
 .theme-label .ball {
-	background-color: var(--bs-light);
+	background-color: #ecf0f1;
+	/* background-color: ##f8f9fa; */
 
 	border-radius: 50%;
 	position: absolute;
@@ -89,25 +89,27 @@
 }
 
 .theme-checkbox:checked + .theme-label .ball {
-	transform: translateX(20px);
-    background-color: var(--bs-dark);
+	transform: translateX(22px);
+    background-color: #303030;
 }
 
 
 .bi-moon-fill {
-	color: #f1c40f;
-    height: 20px;
-	width: 18px;
+	/* color: #f1ad4b; */
+	/* color: white; */
+	color: #f8f9fa;
+    height: 7px;
+	width: 7px;
     position: absolute;
-    top: -1px;
-	right: 1px;
+    top: -2px;
+	right: 12px;
 }
 
 .bi-sun-fill {
-	color: #f39c12;
-    height: 20px;
-	width: 18px;
+	color: #FDB813;
+    height: 18px;
+	width: 16px;
     position: absolute;
-    top: -1px;
-	left: 1px;
+    top: -2px;
+	left: 2px;
 }

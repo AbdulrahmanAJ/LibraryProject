@@ -48,9 +48,7 @@
             <div class="modal-body">
                 <div class="row">
                     <% author.Books.forEach(book => { %>
-                        
-
-                            <div class="col-4 bookCover" bookname="<%= book.bookName %>" authorname="<%= book.Author.authorName %>" id="book<% book.bookId %>Covers" >
+                            <div class="col-sm-6 bookCover" bookname="<%= book.bookName %>" authorname="<%= book.Author.authorName %>" id="book<% book.bookId %>Covers" >
                                 <div class="container px-4 py-3">
                                     <div class="image-container zoom" onclick="openBookModal('<%= book.bookId %>');" >
                                         <img src="/images/book-cover.png" class="image-cover zoom" data-mdb-animation-start="onHover">
@@ -63,8 +61,7 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>

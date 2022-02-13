@@ -99,7 +99,7 @@ exports.postAddAndEditBook = async (req, res) => {
             res.redirect(`/books/`);
             // res.redirect(`/books/#book${ bookId }Covers0`);
         }
-
+        return;
     }
 
     newBook = await Book.create(req.body).catch((err) => {

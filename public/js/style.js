@@ -61,21 +61,23 @@ function changeModalType(bookId){
 
 }
 
-function changeTheme(isDark) {
+async function changeTheme(isDark) {
     console.log(isDark);
     const lightThemeLink = document.getElementById("lightThemeLink");
     const darkThemeLink = document.getElementById("darkThemeLink");
 
     if (isDark) {
-        lightThemeLink.removeAttribute('href')
-        darkThemeLink.setAttribute("href", "/css/darkly.min.css")
-        // lightThemeLink.removeAttribute('rel')
-        // darkThemeLink.setAttribute("rel", "stylesheet")
+        darkThemeLink.setAttribute("rel", "stylesheet")
+        setTimeout(function() {
+            //your code to be executed after 250 millie second
+            lightThemeLink.removeAttribute('rel')
+          }, 250);
     } else {
-        darkThemeLink.removeAttribute('href')
-        lightThemeLink.setAttribute("href", "/css/flaty.min.css")
-        // darkThemeLink.removeAttribute('rel')
-        // lightThemeLink.setAttribute("rel", "stylesheet")
+        lightThemeLink.setAttribute("rel", "stylesheet")
+        setTimeout(function() {
+            //your code to be executed after 250 millie second
+            darkThemeLink.removeAttribute('rel')
+          }, 250);
     }
 
 

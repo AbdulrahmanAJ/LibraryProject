@@ -29,7 +29,8 @@ require('./config/passport')(passport)
 app.use(session({
   secret : 'secret',
   resave : true,
-  saveUninitialized : true
+  saveUninitialized : true,
+  cookie: { maxAge : 30*24*60*60*1000 } // 30 days
 }));
 app.use(passport.initialize());
 app.use(passport.session());
