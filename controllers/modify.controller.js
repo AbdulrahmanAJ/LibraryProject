@@ -128,8 +128,6 @@ exports.postDeleteBook = async (req, res) => {
             userId, bookId
         }
     })
-    // .then(() => {
-    // })
     .catch(() => {
         req.flash('error_msg','Failed to delete the book');
         res.redirect('/books');
