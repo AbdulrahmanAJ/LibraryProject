@@ -89,8 +89,9 @@ exports.getForAuthors = async (req, res) => {
 
     // sort the authors by the highest booksCount
     try {
-        
-        authors.sort((a, b) => (a.booksCount < b.booksCount) ? 1 : -1)
+        authors.sort((a, b) => {
+            return b.Books.length - a.Books.length;
+        });
     } catch (error) {
         res.redirect('/')
     }
