@@ -43,11 +43,11 @@ exports.getForBooks = async (req, res) => {
 
     const authors = await Author.findAll({
         where : {userId: user.userId}
-    })
+    }).catch(err => console.log(err));
 
     const loaners = await Loaner.findAll({
         where : {userId: user.userId}
-    })
+    }).catch(err => console.log(err));
     
     res.render('books',{
         genres, books, user, authors, loaners
@@ -85,10 +85,15 @@ exports.getForAuthors = async (req, res) => {
 
     const loaners = await Loaner.findAll({
         where : {userId: user.userId}
-    })
+    }).catch(err => console.log(err));
 
     // sort the authors by the highest booksCount
-    authors.sort((a, b) => (a.booksCount < b.booksCount) ? 1 : -1)
+    try {
+        
+        authors.sort((a, b) => (a.booksCount < b.booksCount) ? 1 : -1)
+    } catch (error) {
+        res.redirect('/')
+    }
 
     // res.send({
     //     authors

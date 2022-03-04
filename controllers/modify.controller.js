@@ -49,18 +49,21 @@ exports.postAddAndEditBook = async (req, res) => {
 
     // make sure if there is an author name
     if (req.body.authorName) {
-        const [author] = await Author.findOrCreate({  // create an author if the author name is not founded
+        var [author] = await Author.findOrCreate({  // create an author if the author name is not founded
             where: {authorName: req.body.authorName.trim(), userId:user.userId},
         })
         .catch(err => console.log(err));
         req.body.authorId = author.authorId // insert the author Id to the request
     } else {
-        delete req.body.authorName;
+        var author = await Author.create({ where: {userId:user.userId}})
+        .catch(err => console.log(err))
+
+        // delete req.body.authorName;
     }
 
     // it checks if the user added a new genre
     if (req.body.genreId == '-1') { 
-        const [genre] = await Genre.findOrCreate({  // create a genre if not founded
+        var [genre] = await Genre.findOrCreate({  // create a genre if not founded
             where: {genreName: req.body.genreName.trim(), userId:user.userId},
         })
         .catch(err => console.log(err));
@@ -86,7 +89,7 @@ exports.postAddAndEditBook = async (req, res) => {
     
     var newBook;
     if (req.body.bookId) {
-        const bookId = req.body.bookId;
+        var bookId = req.body.bookId;
         delete req.body.bookId;
         newBook = await Book.update(req.body, {
             where: {
@@ -121,8 +124,8 @@ exports.postAddAndEditBook = async (req, res) => {
 
 exports.postDeleteBook = async (req, res) => {
     // get the user from the request
-    const userId = req.user.userId;
-    const bookId = req.body.bookId;
+    var userId = req.user.userId;
+    var bookId = req.body.bookId;
 
     // try to delete the book if done redirect and send success message
     // Delete everyone named "Jane"
