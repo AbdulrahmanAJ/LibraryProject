@@ -24,7 +24,7 @@
                   <div class="col-12">
                     <div class="mb-3">
                       <label for="disabledAuthorName" class="form-label">Author Name</label>
-                      <input type="text" id="disabledTextInput" class="form-control" placeholder="<%= book.Author.authorName %> ">
+                      <input type="text" id="disabledTextInput" class="form-control" placeholder="<%=book.Author ? book.Author.authorName : 'unknown' %>">
                     </div>
                   </div>
                   <div class="col-6">
@@ -91,7 +91,7 @@
                   <div class="col-12">
                     <div class="mb-3">
                       <label for="authorName" class="form-label">Author Name</label>
-                      <input class="form-control" list="authorNamesList" id="authorName" placeholder="Type Author Name..." name="authorName" autocomplete="off" value="<%= book.Author.authorName %>">
+                      <input class="form-control" list="authorNamesList" id="authorName" placeholder="Type Author Name..." name="authorName" autocomplete="off" value="<%=book.Author ? book.Author.authorName : '' %>">
                       <datalist id="authorNamesList">
                         <% authors.forEach(author => { %> 
                         <option><%= author.authorName %></option>
