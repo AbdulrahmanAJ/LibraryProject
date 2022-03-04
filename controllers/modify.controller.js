@@ -51,7 +51,8 @@ exports.postAddAndEditBook = async (req, res) => {
     if (req.body.authorName) {
         const [author] = await Author.findOrCreate({  // create an author if the author name is not founded
             where: {authorName: req.body.authorName.trim(), userId:user.userId},
-        });
+        })
+        .catch(err => console.log(err));
         req.body.authorId = author.authorId // insert the author Id to the request
     } else {
         delete req.body.authorName;
@@ -61,7 +62,8 @@ exports.postAddAndEditBook = async (req, res) => {
     if (req.body.genreId == '-1') { 
         const [genre] = await Genre.findOrCreate({  // create a genre if not founded
             where: {genreName: req.body.genreName.trim(), userId:user.userId},
-        });
+        })
+        .catch(err => console.log(err));
         req.body.genreId = genre.genreId // insert the genre Id to the request
     }
 
@@ -69,7 +71,8 @@ exports.postAddAndEditBook = async (req, res) => {
     if (!(req.body.bookPages)) delete req.body.bookPages;
 
     // check for the book copy
-    var currentCopy = await Book.max('bookCopy', { where: {bookName:req.body.bookName, userId: user.userId} }).catch(err => console.log(err));
+    var currentCopy = await Book.max('bookCopy', { where: {bookName:req.body.bookName, userId: user.userId} })
+    .catch(err => console.log(err));
     if (currentCopy) req.body.bookCopy = currentCopy + 1;
     
     // make trim to the book name
