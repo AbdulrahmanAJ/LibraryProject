@@ -55,9 +55,10 @@ exports.postAddAndEditBook = async (req, res) => {
         .catch(err => console.log(err));
         req.body.authorId = author.authorId // insert the author Id to the request
     } else {
-        var author = await Author.create({ where: {userId:user.userId}})
-        .catch(err => console.log(err))
-
+        var author = await Author.create({ where: {userId:user.userId
+        }}).catch(err => console.log(err))
+        
+        req.body.authorId = author.authorId // insert the author Id to the request
         // delete req.body.authorName;
     }
 
