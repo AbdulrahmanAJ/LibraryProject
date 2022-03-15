@@ -8,13 +8,14 @@ module.exports = async (passport) => {
     usernameField: 'userName',    // define the parameter in req.body that passport can use as username and password
     passwordField: 'userPassword'
   },
+
   async (userName, userPassword, done) => {
-    console.log(userName, userPassword);
     //match user
     var user = await User.findOne( {where: {userName} }).catch(err => console.log(err));
-    if(!user) {
+    if(! user) {
       return done(null,false,{message : 'that user name is not registered'});
     }
+
     //match pass
     var correctPassword = await bcrypt.compare(userPassword, user.userHash);
     if(correctPassword) {
